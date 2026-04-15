@@ -23,5 +23,6 @@ public class InputManager : MonoBehaviour
     {
         movement = moveAction.ReadValue<Vector2>();
         mousePosition = mouseAction.ReadValue<Vector2>();
+        Debug.Log(mousePosition);
     }
 }
