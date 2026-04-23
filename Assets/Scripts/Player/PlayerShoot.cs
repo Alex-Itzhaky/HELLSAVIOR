@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletSpawnPoint;
+    private WeaponHolder weaponHolder;
+    private AmmoController ammoController;
 
     private GameObject bulletInstance;
 
-    private const float SHOOT_COOLDOWN = 0.5f;
     private bool canShoot = true;
-    
-    [SerializeField] private float spreadFactor = 5f;
+
+    private void Awake()
+    {
+        weaponHolder = GetComponentInChildren<WeaponHolder>();
+        ammoController = GetComponentInChildren<AmmoController>();
+    }
 
     private void Update()
     {
@@ -25,23 +29,59 @@ public class PlayerShoot : MonoBehaviour
             ShootGun();
             InputManager.isPlayerShooting = false;
         }
+
+        if (InputManager.isPlayerSwappingWeapons)
+        {
+            weaponHolder.SwapWeapon();
+        }
     }
 
-    private IEnumerator GunCooldown()
+
+    private IEnumerator GunFirerateCooldown(float firerate)
     {
-        float shootCooldown = SHOOT_COOLDOWN;
         canShoot = false;
-        yield return new WaitForSeconds(shootCooldown);
+        yield return new WaitForSeconds(firerate);
         canShoot = true;
+    }
+
+    private IEnumerator GunReload(float reloadTime)
+    {
+        yield return new WaitForSeconds(reloadTime);
+        ammoController.RefillAmmo(weaponHolder.currentWeapon);
     }
 
     private void ShootGun()
     {
         if (!canShoot)
             return;
-        float randomizedSpread = Random.Range(-spreadFactor, spreadFactor);
-        bulletInstance = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bulletInstance.transform.Rotate(0, 0, randomizedSpread);
-        StartCoroutine(GunCooldown());
+        if (!ammoController.HasAmmo(weaponHolder.currentWeapon))
+            return;
+
+        InstantiateBullet();
+        ammoController.ConsumeAmmo(weaponHolder.currentWeapon);
+        if (!ammoController.HasAmmo(weaponHolder.currentWeapon))
+            StartCoroutine(GunReload(weaponHolder.currentWeapon.reloadTime));
+
+        StartCoroutine(GunFirerateCooldown(weaponHolder.currentWeapon.firerate));
     }
+
+    private void InstantiateBullet()
+    {
+        BaseWeaponData weaponData = weaponHolder.currentWeapon;
+
+        GameObject bulletInstance = Instantiate(
+            weaponData.bulletPrefab,
+            bulletSpawnPoint.position,
+            bulletSpawnPoint.rotation
+            );
+        ApplyBulletSpread(bulletInstance);
+        bulletInstance.GetComponent<BaseBulletBehavior>().InitBullet(weaponData);
+        
+    }
+
+    private void ApplyBulletSpread(GameObject bulletInstance)
+    {
+        float randomizedSpread = Random.Range(-weaponHolder.currentWeapon.gunSpread, weaponHolder.currentWeapon.gunSpread);
+        bulletInstance.transform.Rotate(0, 0, randomizedSpread);
+    } 
 }

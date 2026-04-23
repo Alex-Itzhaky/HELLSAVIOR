@@ -15,10 +15,10 @@ public class InvincibleController : MonoBehaviour
         StartCoroutine(InvincibiltyCoroutine(invincibilityDuration));
     }
 
-    public IEnumerator InvincibiltyCoroutine(float invincibilityDuration)
+    private IEnumerator InvincibiltyCoroutine(float invincibilityDuration) //timer pour l'invincibilité
     {
         healthController.isInvincible = true;
-        yield return new WaitForSeconds(invincibilityDuration);
+        yield return new WaitForSeconds(invincibilityDuration); //Attend pendant duration secondes
         healthController.isInvincible = false;
     }
 }

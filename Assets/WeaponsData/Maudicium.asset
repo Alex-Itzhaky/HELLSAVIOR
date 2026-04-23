@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dbf70203654234699dd63fe21be9f8, type: 3}
+  m_Name: Maudicium
+  m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
+  weaponName: Maudicium
+  weaponSprite: {fileID: 0}
+  bulletPrefab: {fileID: 4544130920329254170, guid: 778f4c92648c17b428652c69807bbb17, type: 3}
+  damage: 7
+  firerate: 0.06
+  gunSpread: 12
+  bulletRange: 5
+  ammoCount: 30
+  reloadTime: 0.7
+  moveSpeedMultiplier: 1.3
