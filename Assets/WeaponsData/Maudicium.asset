@@ -17,8 +17,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4544130920329254170, guid: 778f4c92648c17b428652c69807bbb17, type: 3}
   damage: 7
   firerate: 0.06
-  gunSpread: 12
-  bulletRange: 5
-  ammoCount: 30
+  gunSpread: 10
+  bulletRange: 30
+  ammoCount: 40
   reloadTime: 0.7
   moveSpeedMultiplier: 1.3

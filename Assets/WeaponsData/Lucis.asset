@@ -18,7 +18,7 @@ MonoBehaviour:
   damage: 10
   firerate: 0.5
   gunSpread: 10
-  bulletRange: 15
+  bulletRange: 30
   ammoCount: 15
   reloadTime: 1.5
   moveSpeedMultiplier: 1

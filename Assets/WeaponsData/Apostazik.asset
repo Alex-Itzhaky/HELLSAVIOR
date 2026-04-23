@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Apostazik
   weaponSprite: {fileID: 0}
   bulletPrefab: {fileID: 4544130920329254170, guid: 778f4c92648c17b428652c69807bbb17, type: 3}
-  damage: 50
+  damage: 60
   firerate: 1.2
   gunSpread: 0
   bulletRange: 100

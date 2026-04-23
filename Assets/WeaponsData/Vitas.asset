@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
   weaponName: Vitas
   weaponSprite: {fileID: 0}
-  bulletPrefab: {fileID: 0}
-  damage: 0
-  firerate: 0
+  bulletPrefab: {fileID: 5027053210267203892, guid: 19a3767040d083f4bbd8ba5d962f8702, type: 3}
+  damage: 80
+  firerate: 1.4
   gunSpread: 0
   bulletRange: 50
-  ammoCount: 0
-  reloadTime: 0
+  ammoCount: 4
+  reloadTime: 2
   moveSpeedMultiplier: 1
