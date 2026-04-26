@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         ResetSpeed();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (knockback.isKnockedBack)
             return;

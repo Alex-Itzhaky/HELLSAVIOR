@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "CursorPosition",
+                    "name": "Aim",
                     "type": "Value",
                     "id": "8e48d2dd-e8c1-4572-849d-e43b617957ff",
                     "expectedControlType": "Vector2",
@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "LockAim",
+                    "type": "Button",
+                    "id": "b4c9df16-1734-48f6-9ad2-107b36faabfc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -61,7 +70,7 @@
                     "path": "<Keyboard>/#(Z)",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";ClavierSouris",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -72,7 +81,7 @@
                     "path": "<Keyboard>/#(S)",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";ClavierSouris",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -83,7 +92,7 @@
                     "path": "<Keyboard>/#(Q)",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";ClavierSouris",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -94,65 +103,21 @@
                     "path": "<Keyboard>/#(D)",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";ClavierSouris",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Controller",
-                    "id": "8f3e3591-3f7f-4d8c-a0e7-df8bdf475b44",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "9a605870-e3f3-4367-9de5-991101661af6",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Manette",
                     "action": "Move",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "4eaf6fc5-a2d5-40e1-9b77-bd27e5a76898",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "acc17171-a3b3-43af-9a0f-55f9564fbf23",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "f2c26a83-63bc-46e7-a00a-0c140a1d53df",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "3a5e8119-fab3-41f8-aaa3-6598cd2f0e20",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -160,19 +125,19 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "CursorPosition",
+                    "groups": ";ClavierSouris",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "80323d99-206f-4f2b-9774-5f8cbe399a4e",
+                    "id": "3cce540d-d68b-4230-9974-e759cee6bf3a",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "CursorPosition",
+                    "groups": ";Manette",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -182,7 +147,18 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";ClavierSouris",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af778cde-ba04-4085-bc0d-d5537aef3fdf",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Manette",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -193,13 +169,74 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";ClavierSouris",
                     "action": "SwapWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "090580ab-e3d9-4a89-8e43-1e6931e9e2ea",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Manette",
+                    "action": "SwapWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa0f096f-3240-4d51-bb4f-8808d8c95687",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";ClavierSouris",
+                    "action": "LockAim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9410748-6c5f-453a-bb9b-cf022aa088e5",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Manette",
+                    "action": "LockAim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "ClavierSouris",
+            "bindingGroup": "ClavierSouris",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Manette",
+            "bindingGroup": "Manette",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

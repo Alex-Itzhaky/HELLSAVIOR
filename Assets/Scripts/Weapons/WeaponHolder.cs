@@ -18,6 +18,11 @@ public class WeaponHolder : MonoBehaviour
         ammoController = GetComponent<AmmoController>();
     }
 
+    private void Start()
+    {
+        AddWeaponSpeedModifier();
+    }
+
     public BaseWeaponData GetWeaponAt(int index) => equippedWeapons[index];
 
     public void SwapWeapon()
@@ -43,6 +48,17 @@ public class WeaponHolder : MonoBehaviour
         }
         equippedWeapons[slotIndex] = newWeapon;
         ammoController.OnWeaponChanged(slotIndex);
+        AddWeaponSpeedModifier();
     }
-    
+
+    [SerializeField] private BaseWeaponData testWeapon;
+    [SerializeField] private int testSlotIndex;
+
+    [ContextMenu("Test Equip Weapon")]
+
+    private void TestEquipWeapon()
+    {
+        EquipWeapon(testWeapon, testSlotIndex);
+    }
+
 }

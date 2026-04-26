@@ -46,8 +46,9 @@ public class PlayerShoot : MonoBehaviour
 
     private IEnumerator GunReload(float reloadTime)
     {
+        BaseWeaponData weaponToReload = weaponHolder.currentWeapon;
         yield return new WaitForSeconds(reloadTime);
-        ammoController.RefillAmmo(weaponHolder.currentWeapon);
+        ammoController.RefillAmmo(weaponToReload);
     }
 
     private void ShootGun()

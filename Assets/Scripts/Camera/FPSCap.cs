@@ -4,7 +4,7 @@ public class FPSCap : MonoBehaviour
 {
     private void Awake()
     {
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 240;
         QualitySettings.vSyncCount = 0;
     }
 

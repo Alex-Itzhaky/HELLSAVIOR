@@ -40,8 +40,13 @@ public class AmmoController : MonoBehaviour
         RegisterWeapon(weaponHolder.GetWeaponAt(slotIndex));
     }
 
-    
-
-
-
+    private void OnGUI()
+    {
+        int y = 10;
+        foreach (var entry in ammoRegistry)
+        {
+            GUI.Label(new Rect(10, y, 300, 20), $"{entry.Key.weaponName} : {entry.Value}");
+            y += 25;
+        }
+    }
 }

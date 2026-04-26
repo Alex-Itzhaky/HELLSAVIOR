@@ -5,35 +5,65 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
 {
     public static Vector2 movement;
     public static Vector2 mousePosition;
+    public static Vector2 rightStickDirection;
     public static bool isPlayerShooting;
     public static bool isPlayerSwappingWeapons;
+    public static bool isPlayerLockedOnEnemy = false; //Renvoie le lock en toggle on/off
+    
+    private bool isPlayerLockingAim; //Récupère linput
+
+    public static bool isGamepad;
+    [SerializeField] private float maxRightStickAcceptableMagnitude = 0.1f;
 
     private PlayerInput playerInput;
     private InputAction moveAction;
-    private InputAction mousePositionAction;
+    private InputAction aimAction;
     private InputAction shootAction;
     private InputAction swappingAction;
+    private InputAction lockingAction;
+
+    private Camera cam;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         moveAction.Enable();
-        mousePositionAction = playerInput.actions["CursorPosition"];
-        mousePositionAction.Enable();
+        aimAction = playerInput.actions["Aim"];
+        aimAction.Enable();
         shootAction = playerInput.actions["Shoot"];
         shootAction.Enable();
         swappingAction = playerInput.actions["SwapWeapon"];
         swappingAction.Enable();
+        lockingAction = playerInput.actions["LockAim"];
+        lockingAction.Enable();
+
+        cam = Camera.main;
     }
 
     private void Update()
     {
         movement = moveAction.ReadValue<Vector2>();
-        mousePosition = mousePositionAction.ReadValue<Vector2>();
         isPlayerShooting = shootAction.IsPressed();
         isPlayerSwappingWeapons = swappingAction.WasPressedThisFrame();
+        isPlayerLockingAim = lockingAction.WasPressedThisFrame();
 
-        Debug.Log(isPlayerSwappingWeapons);
+        isGamepad = playerInput.currentControlScheme == "Manette";
+        if (isGamepad)
+        {
+            Vector2 rawRightStickDirection = aimAction.ReadValue<Vector2>();
+            if (rawRightStickDirection.magnitude > maxRightStickAcceptableMagnitude)
+            {
+                rightStickDirection = rawRightStickDirection;
+            }
+        }
+        else
+            mousePosition = aimAction.ReadValue<Vector2>();
+
+        if (isPlayerLockingAim)
+        {
+            isPlayerLockedOnEnemy = !isPlayerLockedOnEnemy;
+        }
+        
     }
 }

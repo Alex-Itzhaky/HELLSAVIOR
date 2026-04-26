@@ -12,6 +12,8 @@ public class InvincibleController : MonoBehaviour
 
     public void StartInvincibility(float invincibilityDuration)
     {
+        if (healthController.isInvincible)
+            return;
         StartCoroutine(InvincibiltyCoroutine(invincibilityDuration));
     }
 
