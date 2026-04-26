@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     public static bool isPlayerShooting;
     public static bool isPlayerSwappingWeapons;
     public static bool isPlayerLockedOnEnemy = false; //Renvoie le lock en toggle on/off
+    public static bool isPlayerReloading;
     
     private bool isPlayerLockingAim; //Récupère linput
 
@@ -21,6 +22,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     private InputAction shootAction;
     private InputAction swappingAction;
     private InputAction lockingAction;
+    private InputAction reloadAction;
 
     private Camera cam;
 
@@ -37,6 +39,8 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         swappingAction.Enable();
         lockingAction = playerInput.actions["LockAim"];
         lockingAction.Enable();
+        reloadAction = playerInput.actions["Reload"];
+        reloadAction.Enable();
 
         cam = Camera.main;
     }
@@ -47,6 +51,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         isPlayerShooting = shootAction.IsPressed();
         isPlayerSwappingWeapons = swappingAction.WasPressedThisFrame();
         isPlayerLockingAim = lockingAction.WasPressedThisFrame();
+        isPlayerReloading = reloadAction.WasPressedThisFrame();
 
         isGamepad = playerInput.currentControlScheme == "Manette";
         if (isGamepad)

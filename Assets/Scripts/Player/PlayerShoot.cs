@@ -19,7 +19,11 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
+        HandleSwappingInput();
+        if (ammoController.isWeaponReloading[weaponHolder.currentIndex])
+            return;
         HandleShootingInput();
+        //HandleReloadInput();
     }
 
     private void HandleShootingInput()
@@ -29,7 +33,10 @@ public class PlayerShoot : MonoBehaviour
             ShootGun();
             InputManager.isPlayerShooting = false;
         }
+    }
 
+    private void HandleSwappingInput()
+    {
         if (InputManager.isPlayerSwappingWeapons)
         {
             weaponHolder.SwapWeapon();
@@ -44,13 +51,6 @@ public class PlayerShoot : MonoBehaviour
         canShoot = true;
     }
 
-    private IEnumerator GunReload(float reloadTime)
-    {
-        BaseWeaponData weaponToReload = weaponHolder.currentWeapon;
-        yield return new WaitForSeconds(reloadTime);
-        ammoController.RefillAmmo(weaponToReload);
-    }
-
     private void ShootGun()
     {
         if (!canShoot)
@@ -60,8 +60,6 @@ public class PlayerShoot : MonoBehaviour
 
         InstantiateBullet();
         ammoController.ConsumeAmmo(weaponHolder.currentWeapon);
-        if (!ammoController.HasAmmo(weaponHolder.currentWeapon))
-            StartCoroutine(GunReload(weaponHolder.currentWeapon.reloadTime));
 
         StartCoroutine(GunFirerateCooldown(weaponHolder.currentWeapon.firerate));
     }
