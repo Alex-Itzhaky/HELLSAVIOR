@@ -16,54 +16,54 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     public static bool isGamepad;
     [SerializeField] private float maxRightStickAcceptableMagnitude = 0.1f;
 
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private InputAction aimAction;
-    private InputAction shootAction;
-    private InputAction swappingAction;
-    private InputAction lockingAction;
-    private InputAction reloadAction;
+    private PlayerInput _playerInput;
+    private InputAction _moveAction;
+    private InputAction _aimAction;
+    private InputAction _shootAction;
+    private InputAction _swappingAction;
+    private InputAction _lockingAction;
+    private InputAction _reloadAction;
 
-    private Camera cam;
+    private Camera _cam;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
-        moveAction.Enable();
-        aimAction = playerInput.actions["Aim"];
-        aimAction.Enable();
-        shootAction = playerInput.actions["Shoot"];
-        shootAction.Enable();
-        swappingAction = playerInput.actions["SwapWeapon"];
-        swappingAction.Enable();
-        lockingAction = playerInput.actions["LockAim"];
-        lockingAction.Enable();
-        reloadAction = playerInput.actions["Reload"];
-        reloadAction.Enable();
+        _playerInput = GetComponent<PlayerInput>();
+        _moveAction = _playerInput.actions["Move"];
+        _moveAction.Enable();
+        _aimAction = _playerInput.actions["Aim"];
+        _aimAction.Enable();
+        _shootAction = _playerInput.actions["Shoot"];
+        _shootAction.Enable();
+        _swappingAction = _playerInput.actions["SwapWeapon"];
+        _swappingAction.Enable();
+        _lockingAction = _playerInput.actions["LockAim"];
+        _lockingAction.Enable();
+        _reloadAction = _playerInput.actions["Reload"];
+        _reloadAction.Enable();
 
-        cam = Camera.main;
+        _cam = Camera.main;
     }
 
     private void Update()
     {
-        movement = moveAction.ReadValue<Vector2>();
-        isPlayerShooting = shootAction.IsPressed();
-        isPlayerSwappingWeapons = swappingAction.WasPressedThisFrame();
-        isPlayerLockingAim = lockingAction.WasPressedThisFrame();
-        isPlayerReloading = reloadAction.WasPressedThisFrame();
+        movement = _moveAction.ReadValue<Vector2>();
+        isPlayerShooting = _shootAction.IsPressed();
+        isPlayerSwappingWeapons = _swappingAction.WasPressedThisFrame();
+        isPlayerLockingAim = _lockingAction.WasPressedThisFrame();
+        isPlayerReloading = _reloadAction.WasPressedThisFrame();
 
-        isGamepad = playerInput.currentControlScheme == "Manette";
+        isGamepad = _playerInput.currentControlScheme == "Manette";
         if (isGamepad)
         {
-            Vector2 rawRightStickDirection = aimAction.ReadValue<Vector2>();
+            Vector2 rawRightStickDirection = _aimAction.ReadValue<Vector2>();
             if (rawRightStickDirection.magnitude > maxRightStickAcceptableMagnitude)
             {
                 rightStickDirection = rawRightStickDirection;
             }
         }
         else
-            mousePosition = aimAction.ReadValue<Vector2>();
+            mousePosition = _aimAction.ReadValue<Vector2>();
 
         if (isPlayerLockingAim)
         {

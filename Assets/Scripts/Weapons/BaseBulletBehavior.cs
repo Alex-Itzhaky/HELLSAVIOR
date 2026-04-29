@@ -61,7 +61,7 @@ public class BaseBulletBehavior : MonoBehaviour
 
     private void InflictDamageOnCollision(Collider2D collision)
     {
-        IDamgeable iDamageable = collision.gameObject.GetComponent<IDamgeable>();
+        IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
         if (iDamageable != null)
         {
             iDamageable.Damage(damage);

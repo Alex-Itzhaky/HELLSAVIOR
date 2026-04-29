@@ -37,7 +37,7 @@ public class VitasBullet : BaseBulletBehavior
         Collider2D[] collisionHits = Physics2D.OverlapCircleAll(blastOrigin, blastRadius);
         foreach (Collider2D collisionHit in collisionHits)
         {
-            IDamgeable iDamageable = collisionHit.GetComponent<IDamgeable>();
+            IDamageable iDamageable = collisionHit.GetComponent<IDamageable>();
             if (iDamageable != null)
             {
                 iDamageable.Damage(damage);

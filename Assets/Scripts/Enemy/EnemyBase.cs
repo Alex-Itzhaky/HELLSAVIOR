@@ -1,21 +1,20 @@
 using UnityEngine;
 
-public class EnemyBase : MonoBehaviour, IDamgeable
+public class EnemyBase : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
+    [SerializeField] private float _maxHealth = 100f;
+    [SerializeField] private float _currentHealth;
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
     public void Damage(float damageAmount)
     {
-        currentHealth -= damageAmount;
-        Debug.Log("currentHealth = " + currentHealth);
+        _currentHealth -= damageAmount;
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             Destroy(gameObject);
         }

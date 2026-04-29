@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class RotatePlayer : MonoBehaviour
 {
-    private Camera cam;
-    [SerializeField] private Transform crosshair;
+    private Camera _cam;
+    [SerializeField] private Transform _crosshair;
 
     private void Start()
     {
-        cam = Camera.main;
+        _cam = Camera.main;
     }
 
 
@@ -31,7 +31,7 @@ public class RotatePlayer : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 0f, angle);
         }
         */
-        float angle = Mathf.Atan2(crosshair.position.y - transform.position.y, crosshair.position.x - transform.position.x) * Mathf.Rad2Deg - 90;
+        float angle = Mathf.Atan2(_crosshair.position.y - transform.position.y, _crosshair.position.x - transform.position.x) * Mathf.Rad2Deg - 90;
         transform.eulerAngles = new Vector3(0f, 0f, angle);
         
     }

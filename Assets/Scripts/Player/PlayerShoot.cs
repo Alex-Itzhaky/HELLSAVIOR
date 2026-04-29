@@ -3,24 +3,24 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private Transform bulletSpawnPoint;
-    private WeaponHolder weaponHolder;
-    private AmmoController ammoController;
+    [SerializeField] private Transform _bulletSpawnPoint;
+    private WeaponHolder _weaponHolder;
+    private AmmoController _ammoController;
 
-    private GameObject bulletInstance;
+    private GameObject _bulletInstance;
 
-    private bool canShoot = true;
+    private bool _canShoot = true;
 
     private void Awake()
     {
-        weaponHolder = GetComponentInChildren<WeaponHolder>();
-        ammoController = GetComponentInChildren<AmmoController>();
+        _weaponHolder = GetComponentInChildren<WeaponHolder>();
+        _ammoController = GetComponentInChildren<AmmoController>();
     }
 
     private void Update()
     {
         HandleSwappingInput();
-        if (ammoController.isWeaponReloading[weaponHolder.currentIndex])
+        if (_ammoController.isWeaponReloading[_weaponHolder.currentIndex])
             return;
         HandleShootingInput();
         //HandleReloadInput();
@@ -28,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void HandleShootingInput()
     {
-        if (InputManager.isPlayerShooting && canShoot)
+        if (InputManager.isPlayerShooting && _canShoot)
         {
             ShootGun();
             InputManager.isPlayerShooting = false;
@@ -39,39 +39,39 @@ public class PlayerShoot : MonoBehaviour
     {
         if (InputManager.isPlayerSwappingWeapons)
         {
-            weaponHolder.SwapWeapon();
+            _weaponHolder.SwapWeapon();
         }
     }
 
 
     private IEnumerator GunFirerateCooldown(float firerate)
     {
-        canShoot = false;
+        _canShoot = false;
         yield return new WaitForSeconds(firerate);
-        canShoot = true;
+        _canShoot = true;
     }
 
     private void ShootGun()
     {
-        if (!canShoot)
+        if (!_canShoot)
             return;
-        if (!ammoController.HasAmmo(weaponHolder.currentWeapon))
+        if (!_ammoController.HasAmmo(_weaponHolder.currentWeapon))
             return;
 
         InstantiateBullet();
-        ammoController.ConsumeAmmo(weaponHolder.currentWeapon);
+        _ammoController.ConsumeAmmo(_weaponHolder.currentWeapon);
 
-        StartCoroutine(GunFirerateCooldown(weaponHolder.currentWeapon.firerate));
+        StartCoroutine(GunFirerateCooldown(_weaponHolder.currentWeapon.firerate));
     }
 
     private void InstantiateBullet()
     {
-        BaseWeaponData weaponData = weaponHolder.currentWeapon;
+        BaseWeaponData weaponData = _weaponHolder.currentWeapon;
 
         GameObject bulletInstance = Instantiate(
             weaponData.bulletPrefab,
-            bulletSpawnPoint.position,
-            bulletSpawnPoint.rotation
+            _bulletSpawnPoint.position,
+            _bulletSpawnPoint.rotation
             );
         ApplyBulletSpread(bulletInstance);
         bulletInstance.GetComponent<BaseBulletBehavior>().InitBullet(weaponData);
@@ -80,7 +80,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void ApplyBulletSpread(GameObject bulletInstance)
     {
-        float randomizedSpread = Random.Range(-weaponHolder.currentWeapon.gunSpread, weaponHolder.currentWeapon.gunSpread);
+        float randomizedSpread = Random.Range(-_weaponHolder.currentWeapon.gunSpread, _weaponHolder.currentWeapon.gunSpread);
         bulletInstance.transform.Rotate(0, 0, randomizedSpread);
     } 
 }

@@ -4,42 +4,48 @@ using UnityEngine;
 
 public class CrosshairLockOnEnemy : MonoBehaviour
 {
-    private Transform player;
-    private MoveCrosshair moveCrosshairScript;
+    private Transform _player;
+    private MoveCrosshair _moveCrosshairScript;
 
-    private List<EnemyBase> EnemiesWithinCrosshair = new List<EnemyBase>();
-    private EnemyBase currentEnemyLocked;
+    private List<EnemyBase> _enemiesWithinCrosshair = new List<EnemyBase>();
+    private EnemyBase _currentEnemyLocked;
 
-    [SerializeField] private float angleLockWeight = 0.7f;
-    private float distanceLockWeight => 1f - angleLockWeight;
+    [SerializeField] private float _angleLockWeight = 0.7f;
+    private float _distanceLockWeight => 1f - _angleLockWeight;
 
-    private bool wasPlayerLockedOnEnemyLastFrame;
+    private bool _wasPlayerLockedOnEnemyLastFrame;
+
+    //[SerializeField] private float _stickMagnitudeToSwitch = 0.2f;
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player").transform;
-        moveCrosshairScript = GetComponent<MoveCrosshair>();
+        _player = GameObject.FindWithTag("Player").transform;
+        _moveCrosshairScript = GetComponent<MoveCrosshair>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         
-        if (InputManager.isPlayerLockedOnEnemy && !wasPlayerLockedOnEnemyLastFrame)
+        if (InputManager.isPlayerLockedOnEnemy && !_wasPlayerLockedOnEnemyLastFrame)
             ActivateEnemyLock();
 
-        wasPlayerLockedOnEnemyLastFrame = InputManager.isPlayerLockedOnEnemy;
+        _wasPlayerLockedOnEnemyLastFrame = InputManager.isPlayerLockedOnEnemy;
 
         
         FollowLockedEnemy();
+        StopEnemyLockOnKill(_currentEnemyLocked);
+        
     }
+
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out EnemyBase enemy))
         {
-            if (!EnemiesWithinCrosshair.Contains(enemy))
+            if (!_enemiesWithinCrosshair.Contains(enemy))
             {
-                EnemiesWithinCrosshair.Add(enemy);
+                _enemiesWithinCrosshair.Add(enemy);
             }
         }
     }
@@ -47,9 +53,9 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         EnemyBase enemy = collision.GetComponent<EnemyBase>();
-        if (enemy != null && EnemiesWithinCrosshair.Contains(enemy))
+        if (enemy != null && _enemiesWithinCrosshair.Contains(enemy))
         {
-            EnemiesWithinCrosshair.Remove(enemy);
+            _enemiesWithinCrosshair.Remove(enemy);
         }
     }
 
@@ -57,32 +63,32 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     {
         if (InputManager.isPlayerLockedOnEnemy)
         {
-            if (EnemiesWithinCrosshair.Count <= 0)
+            if (_enemiesWithinCrosshair.Count <= 0)
             {
                 InputManager.isPlayerLockedOnEnemy = false;
-                currentEnemyLocked = null;
+                _currentEnemyLocked = null;
                 return;
             }
 
             EnemyBase lowestScoreEnemy = null;
             float lowestScore = 1000f;
-            foreach (EnemyBase enemy in EnemiesWithinCrosshair)
+            foreach (EnemyBase enemy in _enemiesWithinCrosshair)
             {
                 //On calcule l'ennemi le plus proche en rotation
                 float enemyAngleFromPlayer = Mathf.Atan2(
-                    enemy.transform.position.x -  player.transform.position.x, 
-                    enemy.transform.position.y - player.transform.position.y
+                    enemy.transform.position.x -  _player.transform.position.x, 
+                    enemy.transform.position.y - _player.transform.position.y
                 ) * Mathf.Rad2Deg;
 
                 float angleBetweenPlayerAndEnemy = Mathf.DeltaAngle(transform.eulerAngles.z, enemyAngleFromPlayer);
 
                 //On calcule ensuite l'ennemi le plus proche en distance
 
-                float enemyDistanceFromCrosshair = Vector2.Distance(moveCrosshairScript.transform.position, enemy.transform.position);
+                float enemyDistanceFromCrosshair = Vector2.Distance(transform.position, enemy.transform.position);
 
                 //On finit en calculant le score et en séléctionnant l'ennemi à lock
 
-                float score = ((angleBetweenPlayerAndEnemy / 180) * angleLockWeight) + ((enemyDistanceFromCrosshair / moveCrosshairScript.crosshairDistance) * distanceLockWeight);
+                float score = ((angleBetweenPlayerAndEnemy / 180) * _angleLockWeight) + ((enemyDistanceFromCrosshair / _moveCrosshairScript.crosshairDistance) * _distanceLockWeight);
                 if (score < lowestScore)
                 {
                     lowestScore = score;
@@ -101,21 +107,91 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     {
         if (enemy == null || !InputManager.isPlayerLockedOnEnemy)
             return;
-        currentEnemyLocked = enemy;
-        Debug.Log(currentEnemyLocked.name);
+        _currentEnemyLocked = enemy;
     }
 
     private void FollowLockedEnemy()
     {
+        if (_currentEnemyLocked == null)
+        {
+            InputManager.isPlayerLockedOnEnemy = false;
+            return;
+        }
         if (InputManager.isPlayerLockedOnEnemy)
         {
-            if (currentEnemyLocked == null)
-                return;
-            transform.position = currentEnemyLocked.transform.position;
+            //transform.position = _currentEnemyLocked.transform.position;
+            transform.position = Vector2.Lerp(
+                transform.position,
+                _currentEnemyLocked.transform.position,
+                _moveCrosshairScript.crosshairSmoothingTime * Time.fixedDeltaTime
+            );
         }
         else
         {
-            currentEnemyLocked = null;
+            _currentEnemyLocked = null;
         }
     }
+
+    private void StopEnemyLockOnKill(EnemyBase enemy)
+    {
+        if (enemy == null)
+        {
+            InputManager.isPlayerLockedOnEnemy = false;
+        }
+    }
+
+    //private void SwitchEnemyLock(EnemyBase enemyLocked, List<EnemyBase> enemyList)
+    //{
+    //    if (enemyList.Count < 2)
+    //        return;
+    //    if (!InputManager.isPlayerLockedOnEnemy)
+    //        return;
+    //    if (enemyLocked == null)
+    //        return;
+
+    //    //Etablir la liste des ennemis présent dans la crosshair (enemyLocked exclu)
+    //    List<EnemyBase> potentialEnemiesList = enemyList;
+    //    potentialEnemiesList.Remove(enemyLocked);
+
+    //    if (InputManager.isGamepad)
+    //    {
+    //        if (InputManager.rightStickDirection.magnitude < _stickMagnitudeToSwitch)
+    //            return;
+
+    //        EnemyBase lowestScoreEnemy = null;
+    //        float lowestScore = 1000f;
+    //        foreach (EnemyBase enemy in potentialEnemiesList)
+    //        {
+    //            float rightStickAngle = Mathf.Atan2(
+    //                InputManager.rightStickDirection.x,
+    //                InputManager.rightStickDirection.y
+    //            ) * Mathf.Rad2Deg;
+
+    //            //On calcule l'ennemi le plus proche en rotation
+    //            float enemyAngleFromCrosshair = Mathf.Atan2(
+    //                enemy.transform.position.x - transform.position.x,
+    //                enemy.transform.position.y - transform.position.y
+    //            ) * Mathf.Rad2Deg;
+
+    //            float angleBetweenStickAndEnemy = Mathf.Abs(Mathf.DeltaAngle(rightStickAngle, enemyAngleFromCrosshair));
+
+    //            //On calcule ensuite l'ennemi le plus proche en distance
+
+    //            float enemyDistanceFromCrosshair = Vector2.Distance(transform.position, enemy.transform.position);
+
+    //            //On finit en calculant le score et en séléctionnant l'ennemi à lock
+
+    //            float score = ((angleBetweenStickAndEnemy / 180) * _angleLockWeight) + ((enemyDistanceFromCrosshair / _moveCrosshairScript.crosshairDistance) * _distanceLockWeight);
+    //            if (score < lowestScore)
+    //            {
+    //                lowestScore = score;
+    //                lowestScoreEnemy = enemy;
+    //            }
+    //        }
+    //        if (lowestScoreEnemy != null)
+    //        {
+    //            SetLockedEnemy(lowestScoreEnemy);
+    //        }
+    //    }
+    //}
 }

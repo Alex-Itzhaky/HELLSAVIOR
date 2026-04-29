@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class AmmoController : MonoBehaviour
 {
-    private WeaponHolder weaponHolder;
+    private WeaponHolder _weaponHolder;
 
-    private Dictionary<BaseWeaponData, int> ammoRegistry = new Dictionary<BaseWeaponData, int>();
+    private Dictionary<BaseWeaponData, int> _ammoRegistry = new Dictionary<BaseWeaponData, int>();
 
-    public int currentAmmo => ammoRegistry[weaponHolder.currentWeapon];
+    public int currentAmmo => _ammoRegistry[_weaponHolder.currentWeapon];
     public bool[] isWeaponReloading { get; private set; } = new bool[2];
 
 
     private void Awake()
     {
-        weaponHolder = GetComponent<WeaponHolder>();
+        _weaponHolder = GetComponent<WeaponHolder>();
     }
 
     private void Start()
     {
         for (int i = 0; i < 2; i++) //i < 2 pour les deux solts dans WeaponHolder.equippedWeapons
         {
-            if (weaponHolder.GetWeaponAt(i) == null)
+            if (_weaponHolder.GetWeaponAt(i) == null)
                 continue;
-            RegisterWeapon(weaponHolder.GetWeaponAt(i));
+            RegisterWeapon(_weaponHolder.GetWeaponAt(i));
         }
     }
 
     private void Update()
     {
-        if (isWeaponReloading[weaponHolder.currentIndex])
+        if (isWeaponReloading[_weaponHolder.currentIndex])
             return;
         AutomaticGunReload();
         ManualGunReload();
@@ -37,22 +37,22 @@ public class AmmoController : MonoBehaviour
 
     private void RegisterWeapon(BaseWeaponData weapon)
     {
-        if (!ammoRegistry.ContainsKey(weapon))
-            ammoRegistry[weapon] = weapon.ammoCount;
+        if (!_ammoRegistry.ContainsKey(weapon))
+            _ammoRegistry[weapon] = weapon.ammoCount;
     }
 
-    public bool HasAmmo(BaseWeaponData weapon) => ammoRegistry[weapon] > 0;
-    public void ConsumeAmmo(BaseWeaponData weapon) => ammoRegistry[weapon]--;
-    public void RefillAmmo(BaseWeaponData weapon) => ammoRegistry[weapon] = weapon.ammoCount;
+    public bool HasAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] > 0;
+    public void ConsumeAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon]--;
+    public void RefillAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] = weapon.ammoCount;
 
     public void OnWeaponChanged(int slotIndex)
     {
-        RegisterWeapon(weaponHolder.GetWeaponAt(slotIndex));
+        RegisterWeapon(_weaponHolder.GetWeaponAt(slotIndex));
     }
     private IEnumerator GunReloadCoroutine(float reloadTime, int indexToReload)
     {
         isWeaponReloading[indexToReload] = true;
-        BaseWeaponData weaponToReload = weaponHolder.GetWeaponAt(indexToReload);
+        BaseWeaponData weaponToReload = _weaponHolder.GetWeaponAt(indexToReload);
         yield return new WaitForSeconds(reloadTime);
         RefillAmmo(weaponToReload);
         isWeaponReloading[indexToReload] = false;
@@ -60,17 +60,17 @@ public class AmmoController : MonoBehaviour
 
     private void AutomaticGunReload ()
     {
-        if (!HasAmmo(weaponHolder.currentWeapon))
+        if (!HasAmmo(_weaponHolder.currentWeapon))
         {
-            StartCoroutine(GunReloadCoroutine(weaponHolder.currentWeapon.reloadTime, weaponHolder.currentIndex));
+            StartCoroutine(GunReloadCoroutine(_weaponHolder.currentWeapon.reloadTime, _weaponHolder.currentIndex));
         }
     }
 
     private void ManualGunReload()
     {
-        if (HasAmmo(weaponHolder.currentWeapon) && InputManager.isPlayerReloading)
+        if (HasAmmo(_weaponHolder.currentWeapon) && InputManager.isPlayerReloading)
         {
-            StartCoroutine(GunReloadCoroutine(weaponHolder.currentWeapon.reloadTime, weaponHolder.currentIndex));
+            StartCoroutine(GunReloadCoroutine(_weaponHolder.currentWeapon.reloadTime, _weaponHolder.currentIndex));
         }
     }
 
@@ -78,7 +78,7 @@ public class AmmoController : MonoBehaviour
     private void OnGUI()
     {
         int y = 10;
-        foreach (var entry in ammoRegistry)
+        foreach (var entry in _ammoRegistry)
         {
             GUI.Label(new Rect(10, y, 300, 20), $"{entry.Key.weaponName} : {entry.Value}");
             y += 25;

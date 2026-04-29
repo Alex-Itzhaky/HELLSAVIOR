@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
-    [SerializeField] private BaseWeaponData[] equippedWeapons = new BaseWeaponData[2];
-    private PlayerMovement playerMovement;
-    private AmmoController ammoController;
+    [SerializeField] private BaseWeaponData[] _equippedWeapons = new BaseWeaponData[2];
+    private PlayerMovement _playerMovement;
+    private AmmoController _ammoController;
 
-    public BaseWeaponData currentWeapon => equippedWeapons[currentIndex];
-    public BaseWeaponData stashedWeapon => equippedWeapons[currentIndex - 1];
+    public BaseWeaponData currentWeapon => _equippedWeapons[currentIndex];
+    public BaseWeaponData stashedWeapon => _equippedWeapons[currentIndex - 1];
     public int currentIndex { get; private set; } = 0;
 
     
 
     private void Awake()
     {
-        playerMovement = GetComponentInParent<PlayerMovement>();
-        ammoController = GetComponent<AmmoController>();
+        _playerMovement = GetComponentInParent<PlayerMovement>();
+        _ammoController = GetComponent<AmmoController>();
     }
 
     private void Start()
@@ -23,34 +23,35 @@ public class WeaponHolder : MonoBehaviour
         AddWeaponSpeedModifier();
     }
 
-    public BaseWeaponData GetWeaponAt(int index) => equippedWeapons[index];
+    public BaseWeaponData GetWeaponAt(int index) => _equippedWeapons[index];
 
     public void SwapWeapon()
     {
-        currentIndex = (currentIndex + 1) % equippedWeapons.Length;
+        currentIndex = (currentIndex + 1) % _equippedWeapons.Length;
         AddWeaponSpeedModifier();
     }
 
     private void AddWeaponSpeedModifier()
     {
-        playerMovement.ResetSpeed();
-        playerMovement.ApplyWeaponSpeed(currentWeapon.moveSpeedMultiplier);
+        _playerMovement.ResetSpeed();
+        _playerMovement.ApplyWeaponSpeed(currentWeapon.moveSpeedMultiplier);
     }
 
     private void EquipWeapon(BaseWeaponData newWeapon, int slotIndex)
     {
-        foreach (BaseWeaponData weapon in equippedWeapons)
+        foreach (BaseWeaponData weapon in _equippedWeapons)
         {
             if (weapon == newWeapon)
             {
                 return;
             }
         }
-        equippedWeapons[slotIndex] = newWeapon;
-        ammoController.OnWeaponChanged(slotIndex);
+        _equippedWeapons[slotIndex] = newWeapon;
+        _ammoController.OnWeaponChanged(slotIndex);
         AddWeaponSpeedModifier();
     }
 
+    //Debug EquipWeapon
     [SerializeField] private BaseWeaponData testWeapon;
     [SerializeField] private int testSlotIndex;
 
