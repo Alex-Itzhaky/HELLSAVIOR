@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _maxHealth = 100f;
-    [SerializeField] private float _currentHealth;
+    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private int _currentHealth;
 
     private void Start()
     {
         _currentHealth = _maxHealth;
     }
 
-    public void Damage(float damageAmount)
+    public void Damage(int damageAmount)
     {
         _currentHealth -= damageAmount;
 

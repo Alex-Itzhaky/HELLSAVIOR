@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8bcb5002ead4884cab90f5933efa921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  _baseSpeed: 10
-  _acceleration: 15
+  _baseSpeed: 5
+  _acceleration: 5
   _deceleration: 20
 --- !u!50 &367574974
 Rigidbody2D:
@@ -289,6 +289,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDamagedWhileInvincible:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &367574979
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -944,6 +947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   player: {fileID: 367574975}
   crosshair: {fileID: 1917481489}
+  cameraWeight: 0
+  lookAheadDistance: 5
 --- !u!1 &1380137502
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class BaseBulletBehavior : MonoBehaviour
     [SerializeField] private LayerMask layerDestroyingBullet; //Layers détectées par la collision des balles
     private Vector2 bulletOriginPosition;
 
-    protected float damage;
+    protected int damage;
     private float bulletRange;
 
     [SerializeField] private float bulletSpeed = 100f;

@@ -34,6 +34,8 @@ public class WeaponHolder : MonoBehaviour
     private void AddWeaponSpeedModifier()
     {
         _playerMovement.ResetSpeed();
+        if (currentWeapon != null)
+            return;
         _playerMovement.ApplyWeaponSpeed(currentWeapon.moveSpeedMultiplier);
     }
 

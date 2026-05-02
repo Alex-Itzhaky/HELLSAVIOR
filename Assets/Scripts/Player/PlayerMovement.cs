@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _deceleration = 20f;
     private float _moveSpeed;
 
-    private Vector2 _movement;
+    private Vector2 _movementDir;
     private Vector2 _movementVelocity;
 
     private Rigidbody2D _rb;
@@ -29,10 +29,15 @@ public class PlayerMovement : MonoBehaviour
         if (_knockback.isKnockedBack)
             return;
 
-        _movement = InputManager.movement;
-        if (_movement != Vector2.zero )
+        Move();
+    }
+
+    private void Move()
+    {
+        _movementDir = InputManager.movement;
+        if (_movementDir != Vector2.zero)
         {
-            Vector2 targetVelocity = _movement * _moveSpeed;
+            Vector2 targetVelocity = _movementDir * _moveSpeed;
             _movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
             _rb.linearVelocity = _movementVelocity;
         }

@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] public float currentHealth; //Ne pas toucher à cette valeur dans le script
-    [SerializeField] private float maximumHealth; //Valeur à changer pour modifier les pv de l'entité
+    [SerializeField] public int currentHealth; //Ne pas toucher à cette valeur dans le script
+    [SerializeField] private int maximumHealth; //Valeur à changer pour modifier les pv de l'entité
 
     public float RemainingHealthPercentage
     {
@@ -18,8 +18,9 @@ public class HealthController : MonoBehaviour
 
     public UnityEvent OnDied;
     public UnityEvent OnDamaged;
+    public UnityEvent OnDamagedWhileInvincible;
 
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(int damageAmount)
     {
         if (isInvincible)
             return;
@@ -35,16 +36,20 @@ public class HealthController : MonoBehaviour
         }
     }
 
-    public void TakeTrueDamage(float damageAmount)
+    public void TakeTrueDamage(int damageAmount)
     {
         currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
         if (currentHealth == 0)
         {
             OnDied.Invoke();
         }
+        else
+        {
+            OnDamagedWhileInvincible.Invoke();
+        }
     }
 
-    public void AddHealth(float healthReceived)
+    public void AddHealth(int healthReceived)
     {
         currentHealth = Mathf.Min(currentHealth + healthReceived, maximumHealth);
     }

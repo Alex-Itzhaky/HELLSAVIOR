@@ -6,7 +6,7 @@ public class BaseWeaponData : ScriptableObject
     public string weaponName;
     public Sprite weaponSprite;
     public GameObject bulletPrefab;
-    public float damage;
+    public int damage;
     public float firerate;
     public float gunSpread;
     public float bulletRange = 50f;
