@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LucisBullet : BaseBulletBehavior
 {
-    private float lifeSteal;
+    private int lifeSteal;
     private HealthController healthController;
 
     [SerializeField] private float healthPercentageFromDamage = 0.25f;

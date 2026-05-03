@@ -4,18 +4,21 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public int currentHp;
-    protected EnemyState currentEnemyState;
+    [SerializeField] protected EnemyState currentEnemyState;
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private HealthController _healthController;
+    private HealthController _healthController;
     protected Transform playerTransform;
     protected bool canEnemyAttack;
-    private bool isDamageable = true;
-    [SerializeField] private float spawnTime = 1f;
+    private bool _isDamageable = true;
+    protected bool isSpawning = false;
+    [SerializeField] private float _spawnTime = 1f;
     [SerializeField] protected EnemyData enemyData;
+    private Vector2 _targetDirection;
 
     private void Awake()
     {
-        playerTransform = _healthController.transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _healthController = playerTransform.GetComponent<HealthController>();
     }
     private void Start()
     {
@@ -23,12 +26,13 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     private void FixedUpdate()
     {
-        
+        HandleEnemyStateMachine();
+        SetVelocity();
     }
 
     private void Update()
     {
-        HandleEnemyStateMachine();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -39,40 +43,69 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _healthController.TakeDamage(enemyData.damage);
+        }
+    }
+
     private void InitEnemy()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
+        currentHp = enemyData.maxHp;
         currentEnemyState = EnemyState.Spawning;
     }
 
     private IEnumerator AttackCooldownCoroutine(float duration)
     {
+        canEnemyAttack = false;
         yield return new WaitForSeconds(duration);
+        canEnemyAttack = true;
     }
 
-    private IEnumerator SpawnTimerCoroutine(float duration)
-    {
-        isDamageable = true;
-        yield return new WaitForSeconds(duration);
-        isDamageable = false;
-    }
 
     public void Damage(int damage)
     {
+        if (!_isDamageable)
+            return;
         currentHp -= damage;
-        if (currentHp > 0)
-        {
-            currentEnemyState = EnemyState.Damaged;
-        }
-        else
-        {
+        if (currentHp <= 0)
             currentEnemyState = EnemyState.Dead;
-        }
     }
 
     private bool _CanEnemyAttack()
     {
-        return canEnemyAttack;
+        float distanceBetweenEnemyAndPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        return canEnemyAttack && distanceBetweenEnemyAndPlayer <= enemyData.attackRange;
+    }
+
+
+    private void UpdateTargetDirection()
+    {
+        Vector2 enemyToPlayerVector = playerTransform.position - transform.position;
+        Vector2 directionToPlayer = enemyToPlayerVector.normalized;
+        _targetDirection = directionToPlayer;
+    }
+
+    private void RotateTowardsTarget()
+    {
+        float targetAngle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg - 90;
+        Vector3 targetEulerAngles = new Vector3(0f, 0f, targetAngle);
+        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, targetEulerAngles, enemyData.rotateSpeed * Time.fixedDeltaTime);
+    }
+
+    private void SetVelocity()
+    {
+        if (_targetDirection == null || _targetDirection == Vector2.zero || currentEnemyState != EnemyState.Chase)
+        {
+            _rb.linearVelocity = Vector2.zero;
+        }
+        else
+        {
+            _rb.linearVelocity = transform.up * enemyData.baseSpeed;
+        }
     }
 
 
@@ -81,6 +114,8 @@ public class Enemy : MonoBehaviour, IDamageable
         switch (currentEnemyState)
         {
             case EnemyState.Spawning:
+                if (isSpawning)
+                    return;
                 OnSpawning();
                 currentEnemyState = EnemyState.Chase;
                 break;
@@ -123,41 +158,69 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void OnSpawning()
     {
-        //Jouer les animations de spawn
-        
-        gameObject.SetActive(true);
+        if (isSpawning)
+            return;
         _rb.linearVelocity = Vector2.zero;
+        StartCoroutine(SpawningCoroutine());
+    }
 
+    private IEnumerator SpawningCoroutine()
+    {
+        isSpawning = true;
+
+        _rb.linearVelocity = Vector2.zero; //Immobilise
+        _isDamageable = false; //Pas de damage
+        GetComponent<Collider2D>().enabled = false; //Pas de collisions
+
+        yield return new WaitForSeconds(_spawnTime);
+
+        _isDamageable = true;
+        GetComponent<Collider2D>().enabled = true;
+
+        isSpawning = false;
     }
 
     protected virtual void OnIdle()
     {
-
+        //Jouer animation idle
     }
 
     protected virtual void OnChase()
     {
-
+        UpdateTargetDirection();
+        RotateTowardsTarget();
     }
 
     protected virtual void OnPreparingAttack()
     {
+        //jouer animation préparation attaque
 
     }
 
     protected virtual void OnAttacking()
     {
+        //jouer animation attaque
+
+        //Activer hitbox attaque
+
 
     }
 
     protected virtual void OnDamaged()
     {
+        //trigger particules
+
+        //trigger shader damaged
+
 
     }
 
     protected virtual void OnDead()
     {
+        //Jouer anim mort
 
+        //Une fois anim finie :
+        Destroy(gameObject);
     }
 
     #endregion

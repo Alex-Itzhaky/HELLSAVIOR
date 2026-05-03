@@ -8,7 +8,7 @@ public class VitasBullet : BaseBulletBehavior
 
     [SerializeField] private float blastRadius = 1f;
     [SerializeField] private float blastDuration = 0.5f;
-    [SerializeField] private float healthDrain = 5f;
+    [SerializeField] private int healthDrain = 5;
 
     private bool isExploding = false;
     private Vector2 blastOrigin;

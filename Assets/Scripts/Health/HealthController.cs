@@ -20,6 +20,11 @@ public class HealthController : MonoBehaviour
     public UnityEvent OnDamaged;
     public UnityEvent OnDamagedWhileInvincible;
 
+    private void Awake()
+    {
+        currentHealth = maximumHealth;
+    }
+
     public void TakeDamage(int damageAmount)
     {
         if (isInvincible)

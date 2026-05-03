@@ -7,8 +7,8 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     private Transform _player;
     private MoveCrosshair _moveCrosshairScript;
 
-    private List<EnemyBase> _enemiesWithinCrosshair = new List<EnemyBase>();
-    private EnemyBase _currentEnemyLocked;
+    private List<Enemy> _enemiesWithinCrosshair = new List<Enemy>();
+    private Enemy _currentEnemyLocked;
 
     [SerializeField] private float _angleLockWeight = 0.7f;
     private float _distanceLockWeight => 1f - _angleLockWeight;
@@ -41,21 +41,23 @@ public class CrosshairLockOnEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out EnemyBase enemy))
+        if (collision.TryGetComponent(out Enemy enemy))
         {
             if (!_enemiesWithinCrosshair.Contains(enemy))
             {
                 _enemiesWithinCrosshair.Add(enemy);
+                Debug.Log(_enemiesWithinCrosshair.ToString());
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        EnemyBase enemy = collision.GetComponent<EnemyBase>();
+        Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy != null && _enemiesWithinCrosshair.Contains(enemy))
         {
             _enemiesWithinCrosshair.Remove(enemy);
+            Debug.Log(_enemiesWithinCrosshair.ToString());
         }
     }
 
@@ -70,9 +72,9 @@ public class CrosshairLockOnEnemy : MonoBehaviour
                 return;
             }
 
-            EnemyBase lowestScoreEnemy = null;
+            Enemy lowestScoreEnemy = null;
             float lowestScore = 1000f;
-            foreach (EnemyBase enemy in _enemiesWithinCrosshair)
+            foreach (Enemy enemy in _enemiesWithinCrosshair)
             {
                 //On calcule l'ennemi le plus proche en rotation
                 float enemyAngleFromPlayer = Mathf.Atan2(
@@ -103,7 +105,7 @@ public class CrosshairLockOnEnemy : MonoBehaviour
         }
     }
 
-    private void SetLockedEnemy(EnemyBase enemy)
+    private void SetLockedEnemy(Enemy enemy)
     {
         if (enemy == null || !InputManager.isPlayerLockedOnEnemy)
             return;
@@ -132,7 +134,7 @@ public class CrosshairLockOnEnemy : MonoBehaviour
         }
     }
 
-    private void StopEnemyLockOnKill(EnemyBase enemy)
+    private void StopEnemyLockOnKill(Enemy enemy)
     {
         if (enemy == null)
         {
