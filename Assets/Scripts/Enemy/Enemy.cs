@@ -5,10 +5,9 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public int currentHp;
     [SerializeField] protected EnemyState currentEnemyState;
-    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] protected Rigidbody2D rb;
     private HealthController _healthController;
     protected Transform playerTransform;
-    protected bool canEnemyAttack;
     private bool _isDamageable = true;
     protected bool isSpawning = false;
     [SerializeField] private float _spawnTime = 1f;
@@ -30,10 +29,6 @@ public class Enemy : MonoBehaviour, IDamageable
         SetVelocity();
     }
 
-    private void Update()
-    {
-        
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -55,14 +50,6 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         gameObject.SetActive(true);
         currentHp = enemyData.maxHp;
-        currentEnemyState = EnemyState.Spawning;
-    }
-
-    private IEnumerator AttackCooldownCoroutine(float duration)
-    {
-        canEnemyAttack = false;
-        yield return new WaitForSeconds(duration);
-        canEnemyAttack = true;
     }
 
 
@@ -75,21 +62,15 @@ public class Enemy : MonoBehaviour, IDamageable
             currentEnemyState = EnemyState.Dead;
     }
 
-    private bool _CanEnemyAttack()
-    {
-        float distanceBetweenEnemyAndPlayer = Vector2.Distance(playerTransform.position, transform.position);
-        return canEnemyAttack && distanceBetweenEnemyAndPlayer <= enemyData.attackRange;
-    }
 
-
-    private void UpdateTargetDirection()
+    protected void UpdateTargetDirection()
     {
         Vector2 enemyToPlayerVector = playerTransform.position - transform.position;
         Vector2 directionToPlayer = enemyToPlayerVector.normalized;
         _targetDirection = directionToPlayer;
     }
 
-    private void RotateTowardsTarget()
+    protected void RotateTowardsTarget()
     {
         float targetAngle = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg - 90;
         Vector3 targetEulerAngles = new Vector3(0f, 0f, targetAngle);
@@ -100,58 +81,18 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_targetDirection == null || _targetDirection == Vector2.zero || currentEnemyState != EnemyState.Chase)
         {
-            _rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
         }
         else
         {
-            _rb.linearVelocity = transform.up * enemyData.baseSpeed;
+            rb.linearVelocity = transform.up * enemyData.baseSpeed;
         }
     }
 
 
     protected virtual void HandleEnemyStateMachine()
     {
-        switch (currentEnemyState)
-        {
-            case EnemyState.Spawning:
-                if (isSpawning)
-                    return;
-                OnSpawning();
-                currentEnemyState = EnemyState.Chase;
-                break;
-            case EnemyState.Chase:
-                OnChase();
-                if (_CanEnemyAttack())
-                {
-                    currentEnemyState = EnemyState.PreparingAttack;
-                }
-                break;
-            case EnemyState.PreparingAttack:
-                OnPreparingAttack();
-                currentEnemyState = EnemyState.Attacking;
-                break;
-            case EnemyState.Attacking:
-                OnAttacking();
-                currentEnemyState = EnemyState.Idle;
-                break;
-            case EnemyState.Idle:
-                OnIdle();
-                if (_CanEnemyAttack())
-                {
-                    currentEnemyState = EnemyState.PreparingAttack;
-                }
-                else
-                {
-                    currentEnemyState = EnemyState.Chase;
-                }
-                break;
-            case EnemyState.Damaged:
-                OnDamaged();
-                break;
-            case EnemyState.Dead:
-                OnDead();
-                break;
-        }
+        return;
     }
 
     #region IndividualStates
@@ -160,7 +101,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (isSpawning)
             return;
-        _rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         StartCoroutine(SpawningCoroutine());
     }
 
@@ -168,7 +109,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         isSpawning = true;
 
-        _rb.linearVelocity = Vector2.zero; //Immobilise
+        rb.linearVelocity = Vector2.zero; //Immobilise
         _isDamageable = false; //Pas de damage
         GetComponent<Collider2D>().enabled = false; //Pas de collisions
 
@@ -187,6 +128,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     protected virtual void OnChase()
     {
+        //jouer animation course
+
         UpdateTargetDirection();
         RotateTowardsTarget();
     }

@@ -60,7 +60,7 @@ public class AmmoController : MonoBehaviour
 
     private void AutomaticGunReload ()
     {
-        if (!HasAmmo(_weaponHolder.currentWeapon))
+        if (!HasAmmo(_weaponHolder.currentWeapon) && !isWeaponReloading[_weaponHolder.currentIndex])
         {
             StartCoroutine(GunReloadCoroutine(_weaponHolder.currentWeapon.reloadTime, _weaponHolder.currentIndex));
         }
@@ -68,7 +68,7 @@ public class AmmoController : MonoBehaviour
 
     private void ManualGunReload()
     {
-        if (HasAmmo(_weaponHolder.currentWeapon) && InputManager.isPlayerReloading)
+        if (HasAmmo(_weaponHolder.currentWeapon) && InputManager.isPlayerReloading && !isWeaponReloading[_weaponHolder.currentIndex])
         {
             StartCoroutine(GunReloadCoroutine(_weaponHolder.currentWeapon.reloadTime, _weaponHolder.currentIndex));
         }

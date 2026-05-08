@@ -2,7 +2,6 @@ using UnityEngine;
 
 public enum EnemyState
 {
-    Spawning,
     Idle,
     Chase,
     PreparingAttack,

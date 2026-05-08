@@ -65,10 +65,16 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y, .1f), new Vector3(_areaWidth, _areaHeight, .1f));
     }
 
-    [ContextMenu("Test EnemySpawner")]
-    private void TestEnemySpawn()
+    [ContextMenu("Test LightEnemy Spawn")]
+    private void TestLightEnemySpawn()
     {
         RequestEnemySpawn(EnemyType.Light);
+    }
+
+    [ContextMenu("Test RangedEnemy Spawn")]
+    private void TestRangedEnemySpawn()
+    {
+        RequestEnemySpawn(EnemyType.Ranged);
     }
 
 

@@ -6,12 +6,6 @@ public class LightEnemy : Enemy
     {
         switch(currentEnemyState)
         {
-            case EnemyState.Spawning:
-                if (isSpawning)
-                    return;
-                base.OnSpawning();
-                currentEnemyState = EnemyState.Idle;
-                break;
             case EnemyState.Chase:
                 base.OnChase();
                 break;
