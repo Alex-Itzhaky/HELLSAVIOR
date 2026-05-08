@@ -46,7 +46,6 @@ public class CrosshairLockOnEnemy : MonoBehaviour
             if (!_enemiesWithinCrosshair.Contains(enemy))
             {
                 _enemiesWithinCrosshair.Add(enemy);
-                Debug.Log(_enemiesWithinCrosshair.ToString());
             }
         }
     }
@@ -57,7 +56,6 @@ public class CrosshairLockOnEnemy : MonoBehaviour
         if (enemy != null && _enemiesWithinCrosshair.Contains(enemy))
         {
             _enemiesWithinCrosshair.Remove(enemy);
-            Debug.Log(_enemiesWithinCrosshair.ToString());
         }
     }
 

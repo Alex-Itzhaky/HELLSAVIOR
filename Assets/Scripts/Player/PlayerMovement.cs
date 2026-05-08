@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movementVelocity;
 
     private Rigidbody2D _rb;
-    private KnockbackWhenDamaged _knockback;
+    [SerializeField] private KnockbackWhenDamaged _knockback;
 
     public void ResetSpeed() => _moveSpeed = _baseSpeed;
     public void ApplyWeaponSpeed(float moveSpeedMultiplier) => _moveSpeed *= moveSpeedMultiplier;
@@ -19,16 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _knockback = GetComponent<KnockbackWhenDamaged>();
 
         ResetSpeed();
     }
 
     private void FixedUpdate()
     {
-        if (_knockback.isKnockedBack)
-            return;
-
         Move();
     }
 
@@ -39,12 +35,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 targetVelocity = _movementDir * _moveSpeed;
             _movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
-            _rb.linearVelocity = _movementVelocity;
         }
         else
         {
             Vector2 targetVelocity = Vector2.zero;
             _movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _deceleration * Time.fixedDeltaTime);
+        }
+
+        if (!_knockback.isKnockedBack)
+        {
             _rb.linearVelocity = _movementVelocity;
         }
     }

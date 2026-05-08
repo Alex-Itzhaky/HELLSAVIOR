@@ -20,22 +20,31 @@ public class KnockbackWhenDamaged : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            if (healthController.isInvincible)
-                return;
-            Debug.Log("Enemy Hit");
-            Vector2 dir = transform.position - other.transform.position;
-            dir.Normalize();
-            StartCoroutine(KnockbackCoroutine(dir));
-
-            rb.AddForce(dir * knockbackForce);
+            //if (healthController.isInvincible || isKnockedBack)
+            //    return;
+            OnEnemyHit(other.collider);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            OnEnemyHit(other);
+        }
+    }
+
+    private void OnEnemyHit(Collider2D other)
+    {
+        Vector2 dir = transform.position - other.transform.position;
+        dir.Normalize();
+        StartCoroutine(KnockbackCoroutine(dir));
     }
 
     private IEnumerator KnockbackCoroutine(Vector2 dir)
     {
         isKnockedBack = true;
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(dir * knockbackForce);
+        rb.linearVelocity = dir * knockbackForce;
         yield return new WaitForSeconds(knockbackDuration);
         isKnockedBack = false;
     }

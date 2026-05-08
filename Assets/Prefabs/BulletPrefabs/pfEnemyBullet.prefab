@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1765815929285918345}
   m_Layer: 0
   m_Name: pfEnemyBullet
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 320
   bulletSpeed: 30
-  _healthController: {fileID: 0}
 --- !u!1 &3167784986775228188
 GameObject:
   m_ObjectHideFlags: 0

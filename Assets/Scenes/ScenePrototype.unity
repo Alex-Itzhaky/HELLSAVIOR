@@ -209,8 +209,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _baseSpeed: 10
-  _acceleration: 15
+  _acceleration: 10
   _deceleration: 20
+  _knockback: {fileID: 367574983}
 --- !u!50 &367574974
 Rigidbody2D:
   serializedVersion: 5
@@ -224,7 +225,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 2.5
+  m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -437,8 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ee6cee816450a449324ddf7917d281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnockbackWhenDamaged
-  knockbackForce: 100
-  knockbackDuration: 2
+  knockbackForce: 20
+  knockbackDuration: 0.2
 --- !u!212 &367574984
 SpriteRenderer:
   serializedVersion: 2
