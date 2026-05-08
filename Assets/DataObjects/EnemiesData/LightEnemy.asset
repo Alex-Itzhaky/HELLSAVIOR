@@ -19,6 +19,6 @@ MonoBehaviour:
   attackDuration: 0
   attackCooldown: 0
   attackRange: 0
-  baseSpeed: 5
+  baseSpeed: 7
   rotateSpeed: 100
   enemySprite: {fileID: 0}

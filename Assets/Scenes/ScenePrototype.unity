@@ -164,11 +164,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _lightEnemyPrefab: {fileID: 1002799206182961580, guid: 14db52ca7d44f004492b9721309a74a3, type: 3}
-  _rangedEnemyPrefab: {fileID: 0}
+  _rangedEnemyPrefab: {fileID: 120991728266249601, guid: bee9a2766ad2eac4cb97ba0c6d25821a, type: 3}
   _mediumEnemyPrefab: {fileID: 0}
   _heavyEnemyPrefab: {fileID: 0}
-  _areaWidth: 20
-  _areaHeight: 15
+  _areaWidth: 35
+  _areaHeight: 20
 --- !u!1 &367574971
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 367574971}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.93803, y: 0.61006, z: 0}
+  m_LocalPosition: {x: -14.64, y: 6.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1023,7 +1023,7 @@ Transform:
   m_GameObject: {fileID: 967937936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.93803, y: -0.61006, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
