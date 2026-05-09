@@ -769,14 +769,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3d821842f840849a954f147afe198f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  enemySpawner: {fileID: 19990806}
-  _baseWaveDuration: 3
-  _waveDurationMultiplier: 0
-  _baseNumberOfEnemiesPerWave: 0
-  _lightEnemyChance: 0
-  _rangedEnemyChance: 0
+  _enemySpawner: {fileID: 19990806}
+  _baseWaveDuration: 7
+  _waveDurationMultiplier: 1.5
+  _baseNumberOfEnemiesPerWave: 3
+  _lightEnemyChance: 0.5
+  _rangedEnemyChance: 0.5
   _heavyEnemyChance: 0
   _mediumEnemyChance: 0
+  _currentNumberOfEnemiesPerWave: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
