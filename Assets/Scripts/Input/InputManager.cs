@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
 
     private Camera _cam;
 
+    public static InputManager Instance { get; private set; }
+
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -43,6 +45,16 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         _reloadAction.Enable();
 
         _cam = Camera.main;
+
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     private void Update()

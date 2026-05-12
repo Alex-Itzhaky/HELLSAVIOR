@@ -208,4 +208,4 @@ MonoBehaviour:
   bulletSpeed: 100
   blastRadius: 5
   blastDuration: 1
-  healthDrain: 5
+  healthDrain: 15

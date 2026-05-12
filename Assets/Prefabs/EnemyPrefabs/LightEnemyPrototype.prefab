@@ -123,6 +123,8 @@ MonoBehaviour:
   currentHp: 0
   currentEnemyState: 0
   rb: {fileID: 7564520832737748492}
+  _healthController: {fileID: 0}
+  playerTransform: {fileID: 0}
   _spawnTime: 1
   enemyData: {fileID: 11400000, guid: 8a893e6ff8e32b14dba5b397f4a99185, type: 2}
 --- !u!1 &3151314028566145396

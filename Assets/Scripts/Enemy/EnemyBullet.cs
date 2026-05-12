@@ -1,12 +1,17 @@
 using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class UnityIntEvent : UnityEvent<int> { }
 
 public class EnemyBullet : BaseBulletBehavior
 {
-    private HealthController _healthController;
+    public UnityIntEvent OnPlayerHit;
 
     private void Awake()
     {
-        _healthController = GameObject.FindWithTag("Player").GetComponent<HealthController>();
+        //_healthController = GameObject.FindWithTag("Player").GetComponent<HealthController>();
+
     }
 
     protected override void OnBulletHit(Collider2D collision)
@@ -17,8 +22,6 @@ public class EnemyBullet : BaseBulletBehavior
 
     private void InflictDamageToPlayer()
     {
-        if (_healthController == null)
-            return;
-        _healthController.TakeDamage(damage);
+        OnPlayerHit.Invoke(damage);
     }
 }

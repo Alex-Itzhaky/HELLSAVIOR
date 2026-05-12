@@ -5,7 +5,7 @@ public class LucisBullet : BaseBulletBehavior
     private int lifeSteal;
     private HealthController healthController;
 
-    [SerializeField] private float healthPercentageFromDamage = 0.25f;
+    [SerializeField] private float healthPercentageFromDamage = 0.1f;
 
     private void Awake()
     {

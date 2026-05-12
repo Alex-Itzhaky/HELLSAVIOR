@@ -227,7 +227,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120991728266249601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e456725e11cc3ec4c987833028f91144, type: 3}
   m_Name: 
@@ -235,12 +235,14 @@ MonoBehaviour:
   currentHp: 0
   currentEnemyState: 0
   rb: {fileID: 4944215325824207547}
+  _healthController: {fileID: 0}
+  playerTransform: {fileID: 0}
   _spawnTime: 1
   enemyData: {fileID: 11400000, guid: 68560e332d665704ebeb141a720c3117, type: 2}
   _lineRenderer: {fileID: 7698106426131823217}
   _weaponData: {fileID: 11400000, guid: 4b3f34975a557fe4db3b5bd5cfbf3746, type: 2}
   _bulletSpawnPoint: {fileID: 4434052071782580194}
-  _attackDetectionRange: 15
+  _attackDetectionRange: 10
 --- !u!1 &4411894056785589945
 GameObject:
   m_ObjectHideFlags: 0

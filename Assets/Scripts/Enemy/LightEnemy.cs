@@ -11,7 +11,10 @@ public class LightEnemy : Enemy
                 break;
             case EnemyState.Idle:
                 base.OnIdle();
-                currentEnemyState = EnemyState.Chase;
+                if (isPlayerDead)
+                    currentEnemyState = EnemyState.Idle;
+                else
+                    currentEnemyState = EnemyState.Chase;
                 break;
             case EnemyState.Dead:
                 base.OnDead();

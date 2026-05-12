@@ -6,13 +6,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] public int currentHealth; //Ne pas toucher à cette valeur dans le script
     [SerializeField] private int maximumHealth; //Valeur à changer pour modifier les pv de l'entité
 
-    public float RemainingHealthPercentage
-    {
-        get
-        {
-            return currentHealth / maximumHealth;
-        }
-    }
+    public float RemainingHealthPercentage => (float) currentHealth / (float) maximumHealth;
 
     public bool isInvincible;
 
@@ -34,6 +28,7 @@ public class HealthController : MonoBehaviour
         if (currentHealth == 0)
         {
             OnDied.Invoke();
+            Debug.Log("OnDied event");
         }
         else
         {

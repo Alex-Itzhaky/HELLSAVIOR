@@ -206,4 +206,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   bulletSpeed: 100
-  healthPercentageFromDamage: 0.25
+  healthPercentageFromDamage: 0.1

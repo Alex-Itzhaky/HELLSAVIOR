@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    private enum WaveState
+    public enum WaveState
     {
         Start,
         Playing,
@@ -22,10 +22,12 @@ public class WaveManager : MonoBehaviour
     [Header("Wave Duration Settings")]
     [SerializeField] private float _baseWaveDuration;
     [SerializeField] private float _waveDurationMultiplier;
+    [SerializeField] private float _transitionTime;
     
     private float _currentWaveDuration;
     private float _elapsedWaveTime;
-    public float _ElapsedTimePercentage => _elapsedWaveTime / _currentWaveDuration;
+    public float ElapsedTimePercentage => _elapsedWaveTime / _currentWaveDuration;
+    public WaveState CurrentWaveState => _currentWaveState;
 
     private int _waveCount = 1;
 
@@ -53,10 +55,16 @@ public class WaveManager : MonoBehaviour
         InitWaves();
     }
 
+    private void Update()
+    {
+        HandleWaveStateMachine();
+    }
+
     public void InitWaves()
     {
         _currentWaveDuration = _baseWaveDuration;
         _currentNumberOfEnemiesPerWave = _baseNumberOfEnemiesPerWave;
+        _currentWaveState = WaveState.Start;
     }
 
     private void UpdateWaveDuration()
@@ -69,9 +77,9 @@ public class WaveManager : MonoBehaviour
         _waveCount++;
     }
 
-    private void UpdateEnemyCountPerWave()
+    private void UpdateEnemyCountPerWave(int amount)
     {
-        _currentNumberOfEnemiesPerWave += 1;
+        _currentNumberOfEnemiesPerWave += amount;
     }
 
     private void UpdateEnemySpawnCondition()
@@ -117,7 +125,10 @@ public class WaveManager : MonoBehaviour
         }
 
         _isPlaying = false;
-        _currentWaveState = WaveState.Stopped;
+        UpdateWaveCount();
+        UpdateWaveDuration();
+        UpdateEnemyCountPerWave(1); //A remplacer lorsque les settings de chaque wave seront définis
+        _currentWaveState = WaveState.Transitioning;
     }
 
     private void OnWaveStart()
@@ -141,7 +152,6 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < _currentNumberOfEnemiesPerWave; i++)
         {
             float randomEnemyChance = Random.Range(0f, 1f);
-            Debug.Log(randomEnemyChance);
             if (randomEnemyChance < _lightEnemyChance)
                 enemyList.Add(EnemyType.Light);
             else if (randomEnemyChance < _lightEnemyChance + _rangedEnemyChance)
@@ -164,21 +174,42 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(ManageWaveCoroutine());
     }
 
-    private void OnWaveTransition()
+    private IEnumerator TransitionWaveCoroutine()
     {
-
+        _isTransitioning = true;
+        //Afficher messages
+        //Barre de progression de wave reset
+        yield return new WaitForSeconds(_transitionTime);
+        _isTransitioning = false;
+        _currentWaveState = WaveState.Start;
     }
 
-    private void OnWaveStop()
+    private void OnWaveTransition()
+    {
+        if (_isTransitioning)
+            return;
+        StartCoroutine(TransitionWaveCoroutine());
+    }
+
+    public void OnWaveStop()
     {
         if (_isStopped)
             return;
-        
+        //Afficher messages
+        _isStopped = true;
+        _currentWaveState = WaveState.Stopped;
+        StopAllCoroutines();
     }
 
     [ContextMenu("Test StartWave")]
     private void TestStartWave()
     {
         OnWaveStart();
+    }
+
+    [ContextMenu("Test InitWaves")]
+    private void TestInitWaves()
+    {
+        InitWaves();
     }
 }

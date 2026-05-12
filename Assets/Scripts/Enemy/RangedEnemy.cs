@@ -62,6 +62,10 @@ public class RangedEnemy : Enemy
                 {
                     currentEnemyState = EnemyState.PreparingAttack;
                 }
+                else if (isPlayerDead)
+                {
+                    currentEnemyState = EnemyState.Idle;
+                }
                 else
                 {
                     currentEnemyState = EnemyState.Chase;

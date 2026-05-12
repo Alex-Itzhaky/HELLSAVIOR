@@ -6,10 +6,11 @@ public class Enemy : MonoBehaviour, IDamageable
     public int currentHp;
     [SerializeField] protected EnemyState currentEnemyState;
     [SerializeField] protected Rigidbody2D rb;
-    private HealthController _healthController;
-    protected Transform playerTransform;
+    [SerializeField] private HealthController _healthController;
+    [SerializeField] protected Transform playerTransform;
     private bool _isDamageable = true;
     protected bool isSpawning = false;
+    protected bool isPlayerDead = false;
     [SerializeField] private float _spawnTime = 1f;
     [SerializeField] protected EnemyData enemyData;
     private Vector2 _targetDirection;
@@ -17,6 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (!playerTransform.gameObject.activeInHierarchy)
+            StopEnemyAI();
         _healthController = playerTransform.GetComponent<HealthController>();
     }
     private void Start()
@@ -49,6 +52,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void InitEnemy()
     {
         gameObject.SetActive(true);
+        this.enabled = true;
         currentHp = enemyData.maxHp;
     }
 
@@ -93,6 +97,11 @@ public class Enemy : MonoBehaviour, IDamageable
     protected virtual void HandleEnemyStateMachine()
     {
         return;
+    }
+
+    public void StopEnemyAI()
+    {
+        currentEnemyState = EnemyState.Idle;
     }
 
     #region IndividualStates
