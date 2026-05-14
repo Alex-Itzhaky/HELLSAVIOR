@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AmmoController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AmmoController : MonoBehaviour
 
     public int currentAmmo => _ammoRegistry[_weaponHolder.currentWeapon];
     public bool[] isWeaponReloading { get; private set; } = new bool[2];
+    public float[] ElapsedTimeReloading { get; private set; } = {0f ,0f};
 
 
     private void Awake()
@@ -42,6 +44,7 @@ public class AmmoController : MonoBehaviour
     }
 
     public bool HasAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] > 0;
+    public bool HasMaxAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] >= weapon.ammoCount;
     public void ConsumeAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon]--;
     public void RefillAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] = weapon.ammoCount;
 
@@ -53,9 +56,15 @@ public class AmmoController : MonoBehaviour
     {
         isWeaponReloading[indexToReload] = true;
         BaseWeaponData weaponToReload = _weaponHolder.GetWeaponAt(indexToReload);
-        yield return new WaitForSeconds(reloadTime);
+
+        while (ElapsedTimeReloading[indexToReload] < reloadTime)
+        {
+            ElapsedTimeReloading[indexToReload] += Time.deltaTime;
+            yield return null;
+        }
         RefillAmmo(weaponToReload);
         isWeaponReloading[indexToReload] = false;
+        ElapsedTimeReloading[indexToReload] = 0f;
     }
 
     private void AutomaticGunReload ()
@@ -68,10 +77,15 @@ public class AmmoController : MonoBehaviour
 
     private void ManualGunReload()
     {
-        if (HasAmmo(_weaponHolder.currentWeapon) && InputManager.isPlayerReloading && !isWeaponReloading[_weaponHolder.currentIndex])
+        if (HasAmmo(_weaponHolder.currentWeapon) && !HasMaxAmmo(_weaponHolder.currentWeapon) && InputManager.isPlayerReloading && !isWeaponReloading[_weaponHolder.currentIndex])
         {
             StartCoroutine(GunReloadCoroutine(_weaponHolder.currentWeapon.reloadTime, _weaponHolder.currentIndex));
         }
+    }
+
+    public int GetAmmoAtIndex(int index)
+    {
+        return _ammoRegistry[_weaponHolder.GetWeaponAt(index)];
     }
 
 

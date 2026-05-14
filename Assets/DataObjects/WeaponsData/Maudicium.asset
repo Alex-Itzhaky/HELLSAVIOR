@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Maudicium
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
   weaponName: Maudicium
-  weaponSprite: {fileID: 0}
+  weaponInGameSprite: {fileID: 0}
+  uiWeaponImage: {fileID: -1901366626136475601, guid: 0b28d894b791b6c4e978a7c7902f0fc3, type: 3}
   bulletPrefab: {fileID: 4544130920329254170, guid: 778f4c92648c17b428652c69807bbb17, type: 3}
   damage: 4
   firerate: 0.06

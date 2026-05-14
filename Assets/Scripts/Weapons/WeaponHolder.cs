@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponHolder : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WeaponHolder : MonoBehaviour
     public BaseWeaponData stashedWeapon => _equippedWeapons[currentIndex - 1];
     public int currentIndex { get; private set; } = 0;
 
+    public UnityEvent OnWeaponSwapped;
 
     
 
@@ -30,6 +32,7 @@ public class WeaponHolder : MonoBehaviour
     {
         currentIndex = (currentIndex + 1) % _equippedWeapons.Length;
         AddWeaponSpeedModifier();
+        OnWeaponSwapped.Invoke();
     }
 
     private void AddWeaponSpeedModifier()

@@ -7,7 +7,7 @@ public class UiWaveProgressBar : MonoBehaviour
 {
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private Slider _waveProgressBar;
-    [SerializeField] private TextMeshPro _textField;
+    [SerializeField] private TextMeshProUGUI _textField;
 
 
     private void Start()
@@ -15,6 +15,7 @@ public class UiWaveProgressBar : MonoBehaviour
         _waveProgressBar.minValue = 0f;
         _waveProgressBar.maxValue = 1f;
         _waveProgressBar.value = 0f;
+        _textField.text = "";
     }
 
     private void Update()
@@ -30,5 +31,7 @@ public class UiWaveProgressBar : MonoBehaviour
             _waveProgressBar.value = 1f;
         else
             _waveProgressBar.value = 0f;
+
+        _textField.text = $"Wave {_waveManager.WaveCount}";
     }
 }

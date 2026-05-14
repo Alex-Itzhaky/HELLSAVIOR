@@ -28,8 +28,8 @@ public class WaveManager : MonoBehaviour
     private float _elapsedWaveTime;
     public float ElapsedTimePercentage => _elapsedWaveTime / _currentWaveDuration;
     public WaveState CurrentWaveState => _currentWaveState;
-
-    private int _waveCount = 1;
+    
+    public int WaveCount { get; private set; }
 
     [Header("Wave Enemy Settings")]
     [SerializeField] private int _baseNumberOfEnemiesPerWave;
@@ -50,6 +50,7 @@ public class WaveManager : MonoBehaviour
     private bool _isTransitioning = false;
     private bool _isStopped = false;
 
+
     private void Start()
     {
         InitWaves();
@@ -65,6 +66,7 @@ public class WaveManager : MonoBehaviour
         _currentWaveDuration = _baseWaveDuration;
         _currentNumberOfEnemiesPerWave = _baseNumberOfEnemiesPerWave;
         _currentWaveState = WaveState.Start;
+        WaveCount = 1;
     }
 
     private void UpdateWaveDuration()
@@ -74,7 +76,7 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateWaveCount()
     {
-        _waveCount++;
+        WaveCount++;
     }
 
     private void UpdateEnemyCountPerWave(int amount)

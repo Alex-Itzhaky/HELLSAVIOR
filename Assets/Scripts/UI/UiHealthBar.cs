@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,6 @@ public class UiHealthBar : MonoBehaviour
     {
         if (_healthController == null)
             return;
-        _healthBar.value = Mathf.Lerp(_healthBar.value, _healthController.RemainingHealthPercentage, barSpeed * Time.deltaTime);        
+        _healthBar.DOValue(_healthController.RemainingHealthPercentage, barSpeed);     
     }
 }

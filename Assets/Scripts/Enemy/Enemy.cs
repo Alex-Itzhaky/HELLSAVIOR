@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public int currentHp;
-    [SerializeField] protected EnemyState currentEnemyState;
+    protected EnemyState currentEnemyState;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] private HealthController _healthController;
     [SerializeField] protected Transform playerTransform;
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     private void Start()
     {
-        
+        currentEnemyState = EnemyState.Idle;
     }
     private void FixedUpdate()
     {
