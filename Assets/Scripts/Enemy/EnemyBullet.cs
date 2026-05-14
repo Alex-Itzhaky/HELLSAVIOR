@@ -1,27 +1,30 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class UnityIntEvent : UnityEvent<int> { }
 
 public class EnemyBullet : BaseBulletBehavior
 {
-    public UnityIntEvent OnPlayerHit;
-
+    private HealthController _healthController;
     private void Awake()
     {
-        //_healthController = GameObject.FindWithTag("Player").GetComponent<HealthController>();
+        _healthController = GameObject.FindWithTag("Player").GetComponent<HealthController>();
+    }
 
+    private void Start()
+    {
+        if (_healthController == null)
+            DestroyBullet();
     }
 
     protected override void OnBulletHit(Collider2D collision)
     {
-        InflictDamageToPlayer();
+        if (collision.gameObject.CompareTag("Player"))
+            InflictDamageToPlayer();
         DestroyBullet();
     }
 
     private void InflictDamageToPlayer()
     {
-        OnPlayerHit.Invoke(damage);
+        _healthController.TakeDamage(damage);
     }
 }

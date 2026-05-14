@@ -7,5 +7,6 @@ public enum EnemyState
     PreparingAttack,
     Attacking,
     Damaged,
-    Dead
+    Dead,
+    GameOver
 }

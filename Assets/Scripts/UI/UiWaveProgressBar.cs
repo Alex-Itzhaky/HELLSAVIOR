@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class UiWaveProgressBar : MonoBehaviour
 {
     [SerializeField] private WaveManager _waveManager;
     [SerializeField] private Slider _waveProgressBar;
+    [SerializeField] private TextMeshPro _textField;
 
 
     private void Start()

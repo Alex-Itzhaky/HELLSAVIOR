@@ -19,11 +19,9 @@ public class LightEnemy : Enemy
             case EnemyState.Dead:
                 base.OnDead();
                 break;
-            default:
-                base.OnIdle();
-                currentEnemyState = EnemyState.Idle;
+            case EnemyState.GameOver:
+                base.OnGameOver();
                 break;
-
         }
     }
 }

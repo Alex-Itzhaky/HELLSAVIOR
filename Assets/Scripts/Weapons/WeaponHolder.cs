@@ -10,6 +10,7 @@ public class WeaponHolder : MonoBehaviour
     public BaseWeaponData stashedWeapon => _equippedWeapons[currentIndex - 1];
     public int currentIndex { get; private set; } = 0;
 
+
     
 
     private void Awake()

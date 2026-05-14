@@ -84,6 +84,9 @@ public class RangedEnemy : Enemy
             case EnemyState.Dead:
                 base.OnDead();
                 break;
+            case EnemyState.GameOver:
+                base.OnIdle();
+                break;
         }
     }
 
@@ -152,5 +155,7 @@ public class RangedEnemy : Enemy
         float randomizedSpread = Random.Range(-_weaponData.gunSpread, _weaponData.gunSpread);
         bulletInstance.transform.Rotate(0, 0, randomizedSpread);
     }
+
+    
 
 }

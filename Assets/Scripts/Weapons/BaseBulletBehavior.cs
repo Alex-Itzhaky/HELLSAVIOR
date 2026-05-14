@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseBulletBehavior : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private LayerMask layerDestroyingBullet; //Layers détectées par la collision des balles
     private Vector2 bulletOriginPosition;
@@ -25,6 +25,7 @@ public class BaseBulletBehavior : MonoBehaviour
     private void Update()
     {
         CheckDistanceTravelled();
+        SetVelocity();
     }
 
     public void InitBullet(BaseWeaponData weapon)
@@ -35,8 +36,7 @@ public class BaseBulletBehavior : MonoBehaviour
 
     private void SetVelocity()
     {
-        rb.linearVelocity = transform.up * bulletSpeed;
-    }
+        rb.linearVelocity = transform.up * bulletSpeed;    }
 
     private void SetOriginPosition()
     {
@@ -79,5 +79,10 @@ public class BaseBulletBehavior : MonoBehaviour
     protected void DestroyBullet()
     {
         Destroy(gameObject);
+    }
+
+    public void DestroyImmediatelyBullet()
+    {
+        DestroyImmediate(gameObject, true);
     }
 }

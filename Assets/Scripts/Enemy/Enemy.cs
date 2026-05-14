@@ -21,10 +21,11 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!playerTransform.gameObject.activeInHierarchy)
             StopEnemyAI();
         _healthController = playerTransform.GetComponent<HealthController>();
+
     }
     private void Start()
     {
-        InitEnemy();
+        
     }
     private void FixedUpdate()
     {
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour, IDamageable
         gameObject.SetActive(true);
         this.enabled = true;
         currentHp = enemyData.maxHp;
+        currentEnemyState = EnemyState.Idle;
     }
 
 
@@ -174,6 +176,11 @@ public class Enemy : MonoBehaviour, IDamageable
         //Une fois anim finie :
         Destroy(gameObject);
     }
+    public void OnGameOver()
+    {
+        currentEnemyState = EnemyState.GameOver;
+    }
+
 
     #endregion
 
