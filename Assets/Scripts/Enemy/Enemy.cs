@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    public int currentHp;
+    protected int currentHp;
     protected EnemyState currentEnemyState;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] private HealthController _healthController;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float _spawnTime = 1f;
     [SerializeField] protected EnemyData enemyData;
     private Vector2 _targetDirection;
+    public UnityEvent OnDamaged;
 
     private void Awake()
     {
@@ -21,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!playerTransform.gameObject.activeInHierarchy)
             StopEnemyAI();
         _healthController = playerTransform.GetComponent<HealthController>();
+        InitEnemy();
 
     }
     private void Start()
@@ -52,8 +55,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void InitEnemy()
     {
-        gameObject.SetActive(true);
-        this.enabled = true;
         currentHp = enemyData.maxHp;
         currentEnemyState = EnemyState.Idle;
     }
@@ -64,6 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!_isDamageable)
             return;
         currentHp -= damage;
+        OnDamaged.Invoke();
         if (currentHp <= 0)
             currentEnemyState = EnemyState.Dead;
     }
@@ -156,15 +158,6 @@ public class Enemy : MonoBehaviour, IDamageable
         //jouer animation attaque
 
         //Activer hitbox attaque
-
-
-    }
-
-    protected virtual void OnDamaged()
-    {
-        //trigger particules
-
-        //trigger shader damaged
 
 
     }

@@ -120,13 +120,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5695e5d486b384ead7de8d209529fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightEnemy
-  currentHp: 0
-  currentEnemyState: 0
   rb: {fileID: 7564520832737748492}
   _healthController: {fileID: 0}
   playerTransform: {fileID: 0}
   _spawnTime: 1
   enemyData: {fileID: 11400000, guid: 8a893e6ff8e32b14dba5b397f4a99185, type: 2}
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 631348061468108951}
+        m_TargetAssemblyTypeName: DamageFlash, Assembly-CSharp
+        m_MethodName: CallDamageFlash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3151314028566145396
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5127670199975596582}
   - component: {fileID: 7786775348272124499}
+  - component: {fileID: 631348061468108951}
   m_Layer: 7
   m_Name: EnemyGFX
   m_TagString: Untagged
@@ -185,7 +199,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: df66ecf0d7f6f3f45a43bdc19a6159ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,8 +222,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -9129648605874776814, guid: d7560a17d27a58444a0e68d44446650a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -218,3 +232,61 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &631348061468108951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3151314028566145396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a982cec768e588489cff9028ecb5083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashTime: 0.25
+  _flashAnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -16.634174
+      outSlope: -16.634174
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.06003358
+      value: 0.001390934
+      inSlope: -0.3415615
+      outSlope: -0.3415615
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13565013
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.12393904
+      value: 0.9990628
+      inSlope: -0.22685885
+      outSlope: -0.22685885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.11506525
+    - serializedVersion: 3
+      time: 0.23254395
+      value: -0.004173279
+      inSlope: -9.237484
+      outSlope: -9.237484
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _spriteRenderer: {fileID: 7786775348272124499}
+  _material: {fileID: 2100000, guid: df66ecf0d7f6f3f45a43bdc19a6159ee, type: 2}
