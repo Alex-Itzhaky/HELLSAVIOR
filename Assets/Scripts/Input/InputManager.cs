@@ -3,17 +3,20 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toutes les inputs
 {
-    public static Vector2 movement;
-    public static Vector2 mousePosition;
-    public static Vector2 rightStickDirection;
-    public static bool isPlayerShooting;
-    public static bool isPlayerSwappingWeapons;
-    public static bool isPlayerLockedOnEnemy = false; //Renvoie le lock en toggle on/off
-    public static bool isPlayerReloading;
-    
+    public Vector2 movement { get; private set; }
+    public Vector2 movementFixed { get; private set; }
+    public Vector2 mousePosition { get; private set; }
+    public Vector2 rightStickDirection { get; private set; }
+    public bool isPlayerShooting { get; private set; }
+    public bool isPlayerSwappingWeapons { get; private set; }
+    public bool isPlayerLockedOnEnemy { get; private set; } = false; //Renvoie le lock en toggle on/off
+    public bool isPlayerReloading { get; private set; }
+    public bool isOpeningMenu { get; private set; }
+    public bool isClosingMenuUi { get; private set; }
+
     private bool isPlayerLockingAim; //Récupère linput
 
-    public static bool isGamepad;
+    public bool isGamepad { get; private set; }
     [SerializeField] private float maxRightStickAcceptableMagnitude = 0.1f;
 
     private PlayerInput _playerInput;
@@ -23,6 +26,8 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     private InputAction _swappingAction;
     private InputAction _lockingAction;
     private InputAction _reloadAction;
+    private InputAction _menuOpenAction;
+    private InputAction _menuCloseAction;
 
     private Camera _cam;
 
@@ -43,6 +48,10 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         _lockingAction.Enable();
         _reloadAction = _playerInput.actions["Reload"];
         _reloadAction.Enable();
+        _menuOpenAction = _playerInput.actions["MenuOpen"];
+        _menuOpenAction.Enable();
+        _menuCloseAction = _playerInput.actions["MenuClose"];
+        _menuCloseAction.Enable();
 
         _cam = Camera.main;
 
@@ -57,6 +66,11 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         }
     }
 
+    private void FixedUpdate()
+    {
+        movementFixed = _moveAction.ReadValue<Vector2>();
+    }
+
     private void Update()
     {
         movement = _moveAction.ReadValue<Vector2>();
@@ -64,6 +78,8 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         isPlayerSwappingWeapons = _swappingAction.WasPressedThisFrame();
         isPlayerLockingAim = _lockingAction.WasPressedThisFrame();
         isPlayerReloading = _reloadAction.WasPressedThisFrame();
+        isOpeningMenu = _menuOpenAction.WasPressedThisFrame();
+        isClosingMenuUi = _menuCloseAction.WasPressedThisFrame();
 
         isGamepad = _playerInput.currentControlScheme == "Manette";
         if (isGamepad)
@@ -82,5 +98,10 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
             isPlayerLockedOnEnemy = !isPlayerLockedOnEnemy;
         }
         
+    }
+
+    public void CancelLockInput()
+    {
+        isPlayerLockedOnEnemy = false;
     }
 }

@@ -26,10 +26,10 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (InputManager.isPlayerLockedOnEnemy && !_wasPlayerLockedOnEnemyLastFrame)
+        if (InputManager.Instance.isPlayerLockedOnEnemy && !_wasPlayerLockedOnEnemyLastFrame)
             ActivateEnemyLock();
 
-        _wasPlayerLockedOnEnemyLastFrame = InputManager.isPlayerLockedOnEnemy;
+        _wasPlayerLockedOnEnemyLastFrame = InputManager.Instance.isPlayerLockedOnEnemy;
 
         
         FollowLockedEnemy();
@@ -61,11 +61,11 @@ public class CrosshairLockOnEnemy : MonoBehaviour
 
     private void ActivateEnemyLock()
     {
-        if (InputManager.isPlayerLockedOnEnemy)
+        if (InputManager.Instance.isPlayerLockedOnEnemy)
         {
             if (_enemiesWithinCrosshair.Count <= 0)
             {
-                InputManager.isPlayerLockedOnEnemy = false;
+                InputManager.Instance.CancelLockInput();
                 _currentEnemyLocked = null;
                 return;
             }
@@ -105,7 +105,7 @@ public class CrosshairLockOnEnemy : MonoBehaviour
 
     private void SetLockedEnemy(Enemy enemy)
     {
-        if (enemy == null || !InputManager.isPlayerLockedOnEnemy)
+        if (enemy == null || !InputManager.Instance.isPlayerLockedOnEnemy)
             return;
         _currentEnemyLocked = enemy;
     }
@@ -114,10 +114,10 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     {
         if (_currentEnemyLocked == null)
         {
-            InputManager.isPlayerLockedOnEnemy = false;
+            InputManager.Instance.CancelLockInput();
             return;
         }
-        if (InputManager.isPlayerLockedOnEnemy)
+        if (InputManager.Instance.isPlayerLockedOnEnemy)
         {
             //transform.position = _currentEnemyLocked.transform.position;
             transform.position = Vector2.Lerp(
@@ -136,7 +136,7 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     {
         if (enemy == null)
         {
-            InputManager.isPlayerLockedOnEnemy = false;
+            InputManager.Instance.CancelLockInput();
         }
     }
 

@@ -39,13 +39,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 targetVelocity = _movementDir * _moveSpeed;
             //_movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
-            _movementVelocity = Vector2.SmoothDamp(_movementVelocity, targetVelocity, ref _velocityRef, _acceleration);
+            _movementVelocity = Vector2.SmoothDamp(_movementVelocity, targetVelocity, ref _velocityRef, _acceleration * Time.fixedDeltaTime);
         }
         else
         {
             Vector2 targetVelocity = Vector2.zero;
             //_movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _deceleration * Time.fixedDeltaTime);
-            _movementVelocity = Vector2.SmoothDamp(_movementVelocity, targetVelocity, ref _velocityRef, _deceleration);
+            _movementVelocity = Vector2.SmoothDamp(_movementVelocity, targetVelocity, ref _velocityRef, _deceleration * Time.fixedDeltaTime);
         }
 
 
