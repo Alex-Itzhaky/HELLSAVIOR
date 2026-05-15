@@ -15,6 +15,7 @@ public class PauseManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        Cursor.visible = false;
     }
 
     public void PauseGame()
@@ -22,12 +23,14 @@ public class PauseManager : MonoBehaviour
         IsPaused = true;
         Time.timeScale = 0f;
         //InputManager.playerInput.SwitchCurrentActionMap("UI");
+        Cursor.visible = true;
     }
 
     public void UnpauseGame()
     {
         IsPaused = false;
         Time.timeScale = 1f;
+        Cursor.visible = false;
         //InputManager.playerInput.SwitchCurrentActionMap("Player");
     }
 }

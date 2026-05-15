@@ -40,9 +40,9 @@ public class MoveCrosshair : MonoBehaviour
             Vector2 maxPosition = (Vector2) _playerTransform.position + directionFromPlayer * crosshairDistance;
             Vector2 targetPosition = (distanceFromPlayer < crosshairDistance) ? mousePosition : maxPosition;
 
-            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref _velocityRef, crosshairSmoothingTime * Time.deltaTime);
+            //transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref _velocityRef, crosshairSmoothingTime * Time.deltaTime);
 
-            //transform.position = Vector2.Lerp(transform.position, targetPosition, crosshairSmoothingTime * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, targetPosition, crosshairSmoothingTime * Time.deltaTime);
 
             //transform.DOMove(targetPosition, crosshairSmoothingTime * Time.deltaTime)
             //    .SetEase(Ease.InCubic)
