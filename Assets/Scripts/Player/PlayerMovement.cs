@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 _movementDir;
     private Vector2 _movementVelocity;
+    private Vector2 _velocityRef;
 
     private Rigidbody2D _rb;
     [SerializeField] private KnockbackWhenDamaged _knockback;
@@ -30,21 +32,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        _movementDir = InputManager.movement;
+        if (_knockback.isKnockedBack)
+            return;
+        _movementDir = InputManager.Instance.movementFixed.normalized;
         if (_movementDir != Vector2.zero)
         {
             Vector2 targetVelocity = _movementDir * _moveSpeed;
-            _movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+            //_movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+            _movementVelocity = Vector2.SmoothDamp(_movementVelocity, targetVelocity, ref _velocityRef, _acceleration);
         }
         else
         {
             Vector2 targetVelocity = Vector2.zero;
-            _movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _deceleration * Time.fixedDeltaTime);
+            //_movementVelocity = Vector2.Lerp(_movementVelocity, targetVelocity, _deceleration * Time.fixedDeltaTime);
+            _movementVelocity = Vector2.SmoothDamp(_movementVelocity, targetVelocity, ref _velocityRef, _deceleration);
         }
 
-        if (!_knockback.isKnockedBack)
-        {
-            _rb.linearVelocity = _movementVelocity;
-        }
+
+        _rb.linearVelocity = _movementVelocity;
+
     }
 }

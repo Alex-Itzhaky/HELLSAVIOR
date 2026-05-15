@@ -28,16 +28,16 @@ public class PlayerShoot : MonoBehaviour
 
     private void HandleShootingInput()
     {
-        if (InputManager.isPlayerShooting && _canShoot)
+        if (InputManager.Instance.isPlayerShooting && _canShoot)
         {
             ShootGun();
-            InputManager.isPlayerShooting = false;
+            //InputManager.Instance.isPlayerShooting = false;
         }
     }
 
     private void HandleSwappingInput()
     {
-        if (InputManager.isPlayerSwappingWeapons)
+        if (InputManager.Instance.isPlayerSwappingWeapons)
         {
             _weaponHolder.SwapWeapon();
         }
