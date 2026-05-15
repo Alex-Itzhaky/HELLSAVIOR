@@ -15,9 +15,9 @@ public class UiHealthBar : MonoBehaviour
         _healthBar.maxValue = 1f;
     }
 
-    private void Update()
+    public void UpdateHealthBarValue()
     {
-        if (_healthController == null)
+        if (_healthController == null || PauseManager.Instance.IsPaused)
             return;
         _healthBar.DOValue(_healthController.RemainingHealthPercentage, barSpeed);     
     }
