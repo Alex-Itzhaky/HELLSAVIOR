@@ -847,6 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookAtCursor
   _crosshair: {fileID: 2672460968623716188}
+  smoothingTime: 0.3
 --- !u!114 &367574977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,7 +1548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &558681770
 Transform:
   m_ObjectHideFlags: 0
@@ -1709,7 +1710,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674718395}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 548ad44c694f499499b8a7c7ccd86d60, type: 3}
   m_Name: 
@@ -2656,7 +2657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963251997}
   - component: {fileID: 963251998}
-  - component: {fileID: 963251996}
+  - component: {fileID: 963251999}
   m_Layer: 0
   m_Name: INPUT_MANAGER
   m_TagString: Untagged
@@ -2664,19 +2665,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &963251996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963251995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce33c11c85896394c93cc513901c206e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputManager
-  maxRightStickAcceptableMagnitude: 0.4
 --- !u!4 &963251997
 Transform:
   m_ObjectHideFlags: 0
@@ -2722,6 +2710,19 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &963251999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963251995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce33c11c85896394c93cc513901c206e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  maxRightStickAcceptableMagnitude: 0.4
 --- !u!1 &967937936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,7 +2844,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1152100327}
   - component: {fileID: 1152100328}
-  - component: {fileID: 1152100329}
   m_Layer: 0
   m_Name: Camera Container
   m_TagString: Untagged
@@ -2874,22 +2874,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152100326}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9b510b7f27dc3041ad80e206b73d01c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  player: {fileID: 367574975}
-  crosshair: {fileID: 2672460968623716188}
-  cameraWeight: 0
-  lookAheadDistance: 5
---- !u!114 &1152100329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152100326}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 556e246416212e84187e16a7ec9dc078, type: 3}
@@ -2899,8 +2883,8 @@ MonoBehaviour:
   - {fileID: 367574975}
   - {fileID: 2672460968623716188}
   _followTargetsWeights:
-  - 1.5
-  - 0.5
+  - 1.2
+  - 0.8
   _followSpeed: 5
 --- !u!1 &1240829071
 GameObject:
@@ -4632,8 +4616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776909911bc259e429fa7c16c1510d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveCrosshair
-  crosshairDistance: 7
-  crosshairSmoothingTime: 30
+  crosshairDistance: 8
+  crosshairSmoothingTime: 25
 --- !u!1 &5076968931677537862
 GameObject:
   m_ObjectHideFlags: 0
