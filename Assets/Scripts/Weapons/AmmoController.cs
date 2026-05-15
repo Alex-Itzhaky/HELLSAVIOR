@@ -77,7 +77,7 @@ public class AmmoController : MonoBehaviour
 
     private void ManualGunReload()
     {
-        if (HasAmmo(_weaponHolder.currentWeapon) && !HasMaxAmmo(_weaponHolder.currentWeapon) && InputManager.Instance.isPlayerReloading && !isWeaponReloading[_weaponHolder.currentIndex])
+        if (HasAmmo(_weaponHolder.currentWeapon) && !HasMaxAmmo(_weaponHolder.currentWeapon) && InputManager.isPlayerReloading && !isWeaponReloading[_weaponHolder.currentIndex])
         {
             StartCoroutine(GunReloadCoroutine(_weaponHolder.currentWeapon.reloadTime, _weaponHolder.currentIndex));
         }

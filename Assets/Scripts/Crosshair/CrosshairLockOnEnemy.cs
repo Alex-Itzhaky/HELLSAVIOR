@@ -26,10 +26,10 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (InputManager.Instance.isPlayerLockedOnEnemy && !_wasPlayerLockedOnEnemyLastFrame)
+        if (InputManager.isPlayerLockedOnEnemy && !_wasPlayerLockedOnEnemyLastFrame)
             ActivateEnemyLock();
 
-        _wasPlayerLockedOnEnemyLastFrame = InputManager.Instance.isPlayerLockedOnEnemy;
+        _wasPlayerLockedOnEnemyLastFrame = InputManager.isPlayerLockedOnEnemy;
 
         
         FollowLockedEnemy();
@@ -61,12 +61,11 @@ public class CrosshairLockOnEnemy : MonoBehaviour
 
     private void ActivateEnemyLock()
     {
-        if (InputManager.Instance.isPlayerLockedOnEnemy)
+        if (InputManager.isPlayerLockedOnEnemy)
         {
             if (_enemiesWithinCrosshair.Count <= 0)
             {
-                //InputManager.Instance.isPlayerLockedOnEnemy = false;
-                InputManager.Instance.CancelEnemyLocked();
+                InputManager.isPlayerLockedOnEnemy = false;
                 _currentEnemyLocked = null;
                 return;
             }
@@ -106,7 +105,7 @@ public class CrosshairLockOnEnemy : MonoBehaviour
 
     private void SetLockedEnemy(Enemy enemy)
     {
-        if (enemy == null || !InputManager.Instance.isPlayerLockedOnEnemy)
+        if (enemy == null || !InputManager.isPlayerLockedOnEnemy)
             return;
         _currentEnemyLocked = enemy;
     }
@@ -115,11 +114,10 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     {
         if (_currentEnemyLocked == null)
         {
-            //InputManager.Instance.isPlayerLockedOnEnemy = false;
-            InputManager.Instance.CancelEnemyLocked();
+            InputManager.isPlayerLockedOnEnemy = false;
             return;
         }
-        if (InputManager.Instance.isPlayerLockedOnEnemy)
+        if (InputManager.isPlayerLockedOnEnemy)
         {
             //transform.position = _currentEnemyLocked.transform.position;
             transform.position = Vector2.Lerp(
@@ -138,8 +136,7 @@ public class CrosshairLockOnEnemy : MonoBehaviour
     {
         if (enemy == null)
         {
-            //InputManager.Instance.isPlayerLockedOnEnemy = false;
-            InputManager.Instance.CancelEnemyLocked();
+            InputManager.isPlayerLockedOnEnemy = false;
         }
     }
 

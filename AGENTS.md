@@ -2,7 +2,7 @@
 - Project name: HELLSAVIOR
 - Unity version: Unity 6000.3.11f1
 - Active game object:
-  - Name: EventSystem
-  - Tag: Untagged
-  - Layer: Default
+  - Name: LightEnemyPrototype
+  - Tag: Enemy
+  - Layer: Enemies
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
