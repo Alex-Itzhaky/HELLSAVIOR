@@ -2,11 +2,16 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEditor;
 using System.Collections;
+using UnityEngine.Events;
 
 public class UiPauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject _canvasContainer;
     [SerializeField] private float _revealDuration;
+
+    public UnityEvent OnMainMenu;
+
+
 
     private void Awake()
     {
@@ -53,6 +58,12 @@ public class UiPauseMenu : MonoBehaviour
             return;
         _canvasContainer.SetActive(false);
         PauseManager.Instance.UnpauseGame();
+    }
+
+    public void MainMenu()
+    {
+        PauseManager.Instance.UnpauseGame();
+        OnMainMenu.Invoke();
     }
 
     public void Quit()

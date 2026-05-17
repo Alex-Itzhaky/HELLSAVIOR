@@ -65,7 +65,7 @@ public class WaveManager : MonoBehaviour
     {
         _currentWaveDuration = _baseWaveDuration;
         _currentNumberOfEnemiesPerWave = _baseNumberOfEnemiesPerWave;
-        _currentWaveState = WaveState.Start;
+        _currentWaveState = WaveState.Transitioning;
         WaveCount = 1;
     }
 
