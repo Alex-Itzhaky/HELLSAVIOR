@@ -19,7 +19,7 @@ public class AmmoController : MonoBehaviour
         _weaponHolder = GetComponent<WeaponHolder>();
     }
 
-    private void Start()
+    public void Init()
     {
         for (int i = 0; i < 2; i++) //i < 2 pour les deux solts dans WeaponHolder.equippedWeapons
         {

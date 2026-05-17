@@ -3,9 +3,10 @@ using UnityEngine.Events;
 
 public class WeaponHolder : MonoBehaviour
 {
-    [SerializeField] private BaseWeaponData[] _equippedWeapons = new BaseWeaponData[2];
+    private BaseWeaponData[] _equippedWeapons = new BaseWeaponData[2];
     private PlayerMovement _playerMovement;
     private AmmoController _ammoController;
+    [SerializeField] private UiGuns _gunsUi;
 
     public BaseWeaponData currentWeapon => _equippedWeapons[currentIndex];
     public BaseWeaponData stashedWeapon => _equippedWeapons[currentIndex - 1];
@@ -23,6 +24,19 @@ public class WeaponHolder : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance == null)
+        { Debug.LogError("GameManager introuvable"); return; }
+        if (GameManager.Instance.weaponsEquipped == null)
+        { Debug.LogError("weaponsEquipped est null"); return; }
+
+        foreach (var weapon in GameManager.Instance.weaponsEquipped)
+            Debug.Log(weapon.weaponName);
+
+        EquipWeapon(GameManager.Instance.weaponsEquipped[0], 0);
+        EquipWeapon(GameManager.Instance.weaponsEquipped[1], 1);
+
+        _ammoController.Init();
+        _gunsUi.Init();
         AddWeaponSpeedModifier();
     }
 

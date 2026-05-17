@@ -2091,6 +2091,7 @@ MonoBehaviour:
   _equippedWeapons:
   - {fileID: 11400000, guid: dc8435b222716a74ababcb34db925547, type: 2}
   - {fileID: 11400000, guid: 9c48a8beff4714947921fb6141310f67, type: 2}
+  _gunsUi: {fileID: 210311899}
   OnWeaponSwapped:
     m_PersistentCalls:
       m_Calls:

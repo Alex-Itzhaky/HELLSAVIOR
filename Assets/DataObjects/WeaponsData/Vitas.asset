@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Vitas
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
   weaponName: Vitas
+  weaponDescription: "Un lance-roquette qui produit des explosions a l\u2019impact,
+    elle consomme la vie de l\u2019utilisateur a chaque tir."
   weaponInGameSprite: {fileID: 0}
   uiWeaponImage: {fileID: -1040938210439099282, guid: 0b28d894b791b6c4e978a7c7902f0fc3, type: 3}
   bulletPrefab: {fileID: 5027053210267203892, guid: 19a3767040d083f4bbd8ba5d962f8702, type: 3}
