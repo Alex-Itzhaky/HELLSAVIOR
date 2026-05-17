@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using System.Collections;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +11,11 @@ public class GameManager : MonoBehaviour
     public BaseWeaponData[] weaponsEquipped { get; private set; } = new BaseWeaponData[2];
 
     public bool isLoadedFromMainMenu = false;
+
+    public bool isGameOverPlaying { get; private set; } = false;
+    public UnityEvent GameOver;
+
+    [SerializeField] private SceneAsset _gameOverUI;
     
     private void Awake()
     {
@@ -38,6 +46,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Le jeu n'a pas été lancé depuis le menu principal. Redirection forcée vers la scène MainMenu...");
             SceneManager.LoadScene("MainMenu");
         }
+        isGameOverPlaying = false;
     }
 
     private void OnSceneUnloaded(Scene scene)
@@ -48,5 +57,21 @@ public class GameManager : MonoBehaviour
     public void SetPlayerWeapons(BaseWeaponData[] weapons)
     {
         weaponsEquipped = (BaseWeaponData[])weapons.Clone();
+    }
+
+    public void TriggerPlayerDeath()
+    {
+        Debug.Log("TriggerPlayerDeath");
+        StartCoroutine(PlayerDeathCoroutine());
+    }
+
+    private IEnumerator PlayerDeathCoroutine()
+    {
+        isGameOverPlaying = true;
+        
+        yield return new WaitForSecondsRealtime(2);
+        PauseManager.Instance.PauseGame();
+        yield return SceneManager.LoadSceneAsync(_gameOverUI.name, LoadSceneMode.Additive);
+
     }
 }

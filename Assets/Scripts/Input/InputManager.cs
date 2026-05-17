@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     public bool isGamepad { get; private set; }
     [SerializeField] private float maxRightStickAcceptableMagnitude = 0.1f;
 
-    private PlayerInput _playerInput;
+    public PlayerInput _playerInput { get; private set; }
     private InputAction _moveAction;
     private InputAction _aimAction;
     private InputAction _shootAction;

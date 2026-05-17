@@ -29,6 +29,8 @@ public class UiPauseMenu : MonoBehaviour
     //}
     private void Update()
     {
+        if (GameManager.Instance.isGameOverPlaying)
+            return;
         if (InputManager.Instance.isOpeningMenu && !PauseManager.Instance.IsPaused)
             StartCoroutine(PauseNextFrame());
 

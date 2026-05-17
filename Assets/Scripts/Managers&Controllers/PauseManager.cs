@@ -21,13 +21,13 @@ public class PauseManager : MonoBehaviour
     {
         IsPaused = true;
         Time.timeScale = 0f;
-        //InputManager.playerInput.SwitchCurrentActionMap("UI");
+        //InputManager.Instance._playerInput.SwitchCurrentActionMap("UI");
     }
 
     public void UnpauseGame()
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        //InputManager.playerInput.SwitchCurrentActionMap("Player");
+        //InputManager.Instance._playerInput.SwitchCurrentActionMap("Player");
     }
 }
