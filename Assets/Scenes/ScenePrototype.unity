@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f923aad140434384092578c08bf7ed1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  isLoadedFromMainMenu: 0
 --- !u!1 &210311894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,9 +2089,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548ad44c694f499499b8a7c7ccd86d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHolder
-  _equippedWeapons:
-  - {fileID: 11400000, guid: dc8435b222716a74ababcb34db925547, type: 2}
-  - {fileID: 11400000, guid: 9c48a8beff4714947921fb6141310f67, type: 2}
   _gunsUi: {fileID: 210311899}
   OnWeaponSwapped:
     m_PersistentCalls:
@@ -2107,6 +2105,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+  WeaponHolderInitError:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1921491520}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 102900000, guid: 173c85c8bdf2f0e428013fe80e5d5c85, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEditor.SceneAsset, UnityEditor.CoreModule
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   testWeapon: {fileID: 11400000, guid: a2ac4e6e15a96444fa572ea3c317166a, type: 2}
   testSlotIndex: 0
 --- !u!114 &674718398
@@ -5151,10 +5164,10 @@ CapsuleCollider2D:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 208271446}
   - {fileID: 1152100327}
   - {fileID: 967937937}
   - {fileID: 1814929267}
   - {fileID: 683764057}
   - {fileID: 52099348}
   - {fileID: 1140071109}
-  - {fileID: 208271446}

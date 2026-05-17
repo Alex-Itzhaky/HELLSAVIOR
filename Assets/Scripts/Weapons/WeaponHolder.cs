@@ -14,6 +14,8 @@ public class WeaponHolder : MonoBehaviour
 
     public UnityEvent OnWeaponSwapped;
 
+    public UnityEvent WeaponHolderInitError;
+
     
 
     private void Awake()
@@ -24,13 +26,12 @@ public class WeaponHolder : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance == null)
-        { Debug.LogError("GameManager introuvable"); return; }
-        if (GameManager.Instance.weaponsEquipped == null)
-        { Debug.LogError("weaponsEquipped est null"); return; }
-
-        foreach (var weapon in GameManager.Instance.weaponsEquipped)
-            Debug.Log(weapon.weaponName);
+        if (GameManager.Instance.weaponsEquipped[0] == null && GameManager.Instance.weaponsEquipped[1] == null)
+        { 
+            Debug.LogError("weaponsEquipped est null. Lancez le jeu depuis la scene MainMenu");
+            WeaponHolderInitError.Invoke();
+            return; 
+        }
 
         EquipWeapon(GameManager.Instance.weaponsEquipped[0], 0);
         EquipWeapon(GameManager.Instance.weaponsEquipped[1], 1);

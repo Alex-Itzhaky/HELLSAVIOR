@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public BaseWeaponData[] weaponsEquipped { get; private set; } = new BaseWeaponData[2];
+
+    public bool isLoadedFromMainMenu = false;
     
     private void Awake()
     {
@@ -31,6 +33,11 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         PauseManager.Instance.UnpauseGame();
+        if (scene.name == "ScenePrototype" && !isLoadedFromMainMenu)
+        {
+            Debug.LogWarning("Le jeu n'a pas été lancé depuis le menu principal. Redirection forcée vers la scène MainMenu...");
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     private void OnSceneUnloaded(Scene scene)
