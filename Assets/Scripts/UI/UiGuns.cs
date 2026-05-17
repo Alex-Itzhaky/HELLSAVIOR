@@ -23,7 +23,7 @@ public class UiGuns : MonoBehaviour
     private bool isFirstGunSelected = true;
 
 
-    private void Start()
+    public void Init()
     {
         _firstSlider.maxValue = _weaponHolder.GetWeaponAt(0).reloadTime;
         _secondSlider.maxValue = _weaponHolder.GetWeaponAt(1).reloadTime;

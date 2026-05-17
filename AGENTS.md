@@ -2,7 +2,7 @@
 - Project name: HELLSAVIOR
 - Unity version: Unity 6000.3.11f1
 - Active game object:
-  - Name: PlayerGFX
+  - Name: GunPickUi
   - Tag: Untagged
-  - Layer: Player
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
