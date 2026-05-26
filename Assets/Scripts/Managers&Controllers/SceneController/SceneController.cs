@@ -13,9 +13,9 @@ public class SceneController : MonoBehaviour
         yield return _sceneFade.FadeInCoroutine(_sceneFadeDuration);
     }
 
-    public void LoadScene(SceneAsset scene)
+    public void LoadScene(string scene)
     {
-        StartCoroutine(LoadSceneCoroutine(scene.name));
+        StartCoroutine(LoadSceneCoroutine(scene));
     }
 
     private IEnumerator LoadSceneCoroutine(string sceneName)
