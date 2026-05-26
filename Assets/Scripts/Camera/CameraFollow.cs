@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform crosshair;
 
     [SerializeField] private float cameraWeight;
-    [SerializeField] private float lookAheadDistance = 5f;
+    //[SerializeField] private float lookAheadDistance = 5f;
     
 
     private Camera cam;

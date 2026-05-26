@@ -13,6 +13,7 @@ public class GameOverUi : MonoBehaviour
 
     public void RevealUI()
     {
+        PauseManager.Instance.PauseGame();
         Debug.Log("reveal GameOver Ui");
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
@@ -20,7 +21,6 @@ public class GameOverUi : MonoBehaviour
             .SetEase(Ease.OutCubic)
             .SetUpdate(true)
             .OnComplete(() => { 
-                PauseManager.Instance.PauseGame();
                 InputManager.Instance.SwitchInputMap(InputManager.ActionMap.UI);
             });
     }

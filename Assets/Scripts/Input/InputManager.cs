@@ -36,6 +36,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        playerInput.enabled = true;
         _moveAction = playerInput.actions["Move"];
         _moveAction.Enable();
         _aimAction = playerInput.actions["Aim"];
