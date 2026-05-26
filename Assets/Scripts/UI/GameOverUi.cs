@@ -13,11 +13,16 @@ public class GameOverUi : MonoBehaviour
 
     public void RevealUI()
     {
+        PauseManager.Instance.PauseGame();
+        Debug.Log("reveal GameOver Ui");
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
         _canvasGroup.DOFade(1f, _fadeDuration)
             .SetEase(Ease.OutCubic)
-            .OnComplete(() => PauseManager.Instance.PauseGame());
+            .SetUpdate(true)
+            .OnComplete(() => { 
+                InputManager.Instance.SwitchInputMap(InputManager.ActionMap.UI);
+            });
     }
 
     public void Restart()
@@ -36,6 +41,11 @@ public class GameOverUi : MonoBehaviour
         EditorApplication.ExitPlaymode();
 #endif
         Application.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.SwitchInputMap(InputManager.ActionMap.Player);
     }
 
 }

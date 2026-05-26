@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
     public bool isGamepad { get; private set; }
     [SerializeField] private float maxRightStickAcceptableMagnitude = 0.1f;
 
-    public PlayerInput _playerInput { get; private set; }
+    public PlayerInput playerInput { get; private set; }
     private InputAction _moveAction;
     private InputAction _aimAction;
     private InputAction _shootAction;
@@ -35,22 +35,23 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
 
     private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
-        _moveAction = _playerInput.actions["Move"];
+        playerInput = GetComponent<PlayerInput>();
+        playerInput.enabled = true;
+        _moveAction = playerInput.actions["Move"];
         _moveAction.Enable();
-        _aimAction = _playerInput.actions["Aim"];
+        _aimAction = playerInput.actions["Aim"];
         _aimAction.Enable();
-        _shootAction = _playerInput.actions["Shoot"];
+        _shootAction = playerInput.actions["Shoot"];
         _shootAction.Enable();
-        _swappingAction = _playerInput.actions["SwapWeapon"];
+        _swappingAction = playerInput.actions["SwapWeapon"];
         _swappingAction.Enable();
-        _lockingAction = _playerInput.actions["LockAim"];
+        _lockingAction = playerInput.actions["LockAim"];
         _lockingAction.Enable();
-        _reloadAction = _playerInput.actions["Reload"];
+        _reloadAction = playerInput.actions["Reload"];
         _reloadAction.Enable();
-        _menuOpenAction = _playerInput.actions["MenuOpen"];
+        _menuOpenAction = playerInput.actions["MenuOpen"];
         _menuOpenAction.Enable();
-        _menuCloseAction = _playerInput.actions["MenuClose"];
+        _menuCloseAction = playerInput.actions["MenuClose"];
         _menuCloseAction.Enable();
 
         _cam = Camera.main;
@@ -81,7 +82,7 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         isOpeningMenu = _menuOpenAction.WasPressedThisFrame();
         isClosingMenuUi = _menuCloseAction.WasPressedThisFrame();
 
-        isGamepad = _playerInput.currentControlScheme == "Manette";
+        isGamepad = playerInput.currentControlScheme == "Manette";
         if (isGamepad)
         {
             Vector2 rawRightStickDirection = _aimAction.ReadValue<Vector2>();
@@ -97,11 +98,21 @@ public class InputManager : MonoBehaviour //j'utilise cet objet pour gérer toute
         {
             isPlayerLockedOnEnemy = !isPlayerLockedOnEnemy;
         }
-        
+
     }
 
     public void CancelLockInput()
     {
         isPlayerLockedOnEnemy = false;
+    }
+
+    public enum ActionMap
+    {
+        Player,
+        UI
+    }
+    public void SwitchInputMap(ActionMap actionMap)
+    {
+        playerInput.SwitchCurrentActionMap(actionMap.ToString());
     }
 }

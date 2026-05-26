@@ -96,7 +96,6 @@ public class GunEquipUi : MonoBehaviour
         if (_chosenWeapons[0] == null || _chosenWeapons[1] == null) 
             return;
         GameManager.Instance.SetPlayerWeapons(_chosenWeapons);
-        GameManager.Instance.isLoadedFromMainMenu = true;
         Started.Invoke();
     }
 }
