@@ -1480,7 +1480,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ScenePrototype
+          m_StringArgument: GameScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &379268123
@@ -3138,6 +3138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   _soundFXObject: {fileID: 2175136213924612834, guid: 7480af8acca6088438e76389381692cf, type: 3}
   _musicObject: {fileID: 3755867579320087641, guid: 4aef77eb1f896514d83872aa644e4768, type: 3}
+  _audioMixer: {fileID: 24100000, guid: 7d817870d6b26e446b7e58a83044fcc3, type: 2}
 --- !u!1 &1474557902
 GameObject:
   m_ObjectHideFlags: 0

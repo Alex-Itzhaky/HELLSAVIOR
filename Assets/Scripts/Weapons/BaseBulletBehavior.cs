@@ -26,6 +26,7 @@ public class BaseBulletBehavior : MonoBehaviour
     {
         CheckDistanceTravelled();
         SetVelocity();
+        Debug.Log($"Transform.up = {transform.up}");
     }
 
     public void InitBullet(WeaponData weapon)
@@ -64,7 +65,7 @@ public class BaseBulletBehavior : MonoBehaviour
         IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
         if (iDamageable != null)
         {
-            iDamageable.Damage(damage);
+            iDamageable.Damage(damage, transform.right);
         }
     }
 

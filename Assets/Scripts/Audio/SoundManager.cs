@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource _soundFXObject;
     [SerializeField] private AudioSource _musicObject;
-    public AudioMixer _audioMixer { get; private set; }
+    public AudioMixer _audioMixer;
 
     private float _previousMusicVolume;
     private bool _isMusicMuted;

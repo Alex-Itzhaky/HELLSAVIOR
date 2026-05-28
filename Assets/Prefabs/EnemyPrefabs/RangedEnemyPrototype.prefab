@@ -257,6 +257,7 @@ MonoBehaviour:
   _deathSound: {fileID: 8300000, guid: 7c7a9ebdd48357a4bbcf2ee72599e2da, type: 3}
   _averageTimeBetweenSounds: 15
   _maxTimeOffsetOfSounds: 3
+  _damageParticlesPrefab: {fileID: 2590829394120862990, guid: 044fedf8e9ef20e48804b60edd08eba4, type: 3}
   _lineRenderer: {fileID: 7698106426131823217}
   _weaponData: {fileID: 11400000, guid: 4b3f34975a557fe4db3b5bd5cfbf3746, type: 2}
   _bulletSpawnPoint: {fileID: 4434052071782580194}

@@ -41,7 +41,7 @@ public class VitasBullet : BaseBulletBehavior
             IDamageable iDamageable = collisionHit.GetComponent<IDamageable>();
             if (iDamageable != null)
             {
-                iDamageable.Damage(damage);
+                iDamageable.Damage(damage, transform.up);
             }
         }
         yield return new WaitForSeconds(blastDuration);

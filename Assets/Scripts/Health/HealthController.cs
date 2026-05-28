@@ -38,7 +38,7 @@ public class HealthController : MonoBehaviour
         else
         {
             OnDamaged.Invoke();
-
+            SoundManager.Instance.PlaySoundFXClip(_damageSFX, transform);
         }
     }
 

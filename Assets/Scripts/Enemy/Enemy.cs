@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float _averageTimeBetweenSounds;
     [SerializeField] private float _maxTimeOffsetOfSounds;
 
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem _damageParticlesPrefab;
+    private ParticleSystem _damageParticlesInstance;
+
     private void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -68,10 +72,12 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
 
-    public void Damage(int damage)
+    public void Damage(int damage, Vector2 attackDirection)
     {
         if (!_isDamageable)
             return;
+        SpawnDamageParticles(attackDirection);
+
         currentHp -= damage;
         OnDamaged.Invoke();
         if (currentHp <= 0)
@@ -210,5 +216,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
 
     #endregion
+
+    private void SpawnDamageParticles(Vector2 attackDirection)
+    {
+        Quaternion spawnRotation = Quaternion.LookRotation(attackDirection);
+
+        _damageParticlesInstance = Instantiate(_damageParticlesPrefab, transform.position, spawnRotation);
+    }
 
 }

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public WeaponData[] weaponsEquipped { get; private set; } = new WeaponData[2];
 
+    public bool isGameRunning = false;
     public bool isLoadedFromMainMenu = false;
 
     public bool isGameOverPlaying { get; private set; } = false;
@@ -42,16 +43,20 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         PauseManager.Instance.UnpauseGame();
-        if (scene.name == "ScenePrototype" && !isLoadedFromMainMenu)
+        if (scene.name == "GameScene" && !isLoadedFromMainMenu)
         {
             Debug.LogWarning("Le jeu n'a pas été lancé depuis le menu principal. Redirection forcée vers la scène MainMenu...");
             SceneManager.LoadScene("MainMenu");
         }
         if (scene.name == "MainMenu" && !isLoadedFromMainMenu)
             isLoadedFromMainMenu = true;
-        if (scene.name == "ScenePrototype" && isLoadedFromMainMenu)
+        if (scene.name == "GameScene" && isLoadedFromMainMenu)
             SoundManager.Instance.PlayMusicClip(_gameMusic, transform);
 
+        if (isGameRunning)
+            SoundManager.Instance.UnmuteMusic();
+        else
+            isGameRunning = true;
 
         isGameOverPlaying = false;
     }

@@ -140,10 +140,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _randomSound: []
+  _randomSounds: []
   _deathSound: {fileID: 8300000, guid: 7ab20dd96ac321d4fb38440edd52232e, type: 3}
   _averageTimeBetweenSounds: 12
   _maxTimeOffsetOfSounds: 5
+  _damageParticlesPrefab: {fileID: 2590829394120862990, guid: 044fedf8e9ef20e48804b60edd08eba4, type: 3}
 --- !u!1 &3151314028566145396
 GameObject:
   m_ObjectHideFlags: 0
