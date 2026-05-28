@@ -17,8 +17,8 @@ public class GunEquipUi : MonoBehaviour
     [SerializeField] private Button _firstWeaponButton;
     [SerializeField] private Button _secondWeaponButton;
 
-    private BaseWeaponData[] _chosenWeapons = new BaseWeaponData[2];
-    [SerializeField] private BaseWeaponData[] _availableWeapons = new BaseWeaponData[5];
+    private WeaponData[] _chosenWeapons = new WeaponData[2];
+    [SerializeField] private WeaponData[] _availableWeapons = new WeaponData[5];
 
     private CanvasGroup _canvasGroup;
     [SerializeField] private float _fadeDuration;
@@ -37,13 +37,13 @@ public class GunEquipUi : MonoBehaviour
         _canvasGroup.blocksRaycasts = true;
     }
 
-    public void ShowDescription(BaseWeaponData weapon)
+    public void ShowDescription(WeaponData weapon)
     {
         _weaponNameText.text = weapon.weaponName;
         _weaponDescriptionText.text = weapon.weaponDescription;
     }
 
-    public void EquipNewWeapon(BaseWeaponData weapon)
+    public void EquipNewWeapon(WeaponData weapon)
     {
         bool alreadyChosen = System.Array.IndexOf(_chosenWeapons, weapon) != -1;
         bool isAvailable = System.Array.IndexOf(_availableWeapons, weapon) != -1;
@@ -71,7 +71,7 @@ public class GunEquipUi : MonoBehaviour
 
     public void UnequipWeapon(int slotIndex)
     {
-        BaseWeaponData weapon = _chosenWeapons[slotIndex];
+        WeaponData weapon = _chosenWeapons[slotIndex];
         if (weapon == null) return;
 
         _chosenWeapons[slotIndex] = null;

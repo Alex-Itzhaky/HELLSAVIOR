@@ -3,13 +3,13 @@ using UnityEngine.Events;
 
 public class WeaponHolder : MonoBehaviour
 {
-    private BaseWeaponData[] _equippedWeapons = new BaseWeaponData[2];
+    private WeaponData[] _equippedWeapons = new WeaponData[2];
     private PlayerMovement _playerMovement;
     private AmmoController _ammoController;
     [SerializeField] private UiGuns _gunsUi;
 
-    public BaseWeaponData currentWeapon => _equippedWeapons[currentIndex];
-    public BaseWeaponData stashedWeapon => _equippedWeapons[currentIndex - 1];
+    public WeaponData currentWeapon => _equippedWeapons[currentIndex];
+    public WeaponData stashedWeapon => _equippedWeapons[currentIndex - 1];
     public int currentIndex { get; private set; } = 0;
 
     public UnityEvent OnWeaponSwapped;
@@ -41,7 +41,7 @@ public class WeaponHolder : MonoBehaviour
         AddWeaponSpeedModifier();
     }
 
-    public BaseWeaponData GetWeaponAt(int index) => _equippedWeapons[index];
+    public WeaponData GetWeaponAt(int index) => _equippedWeapons[index];
 
     public void SwapWeapon()
     {
@@ -58,9 +58,9 @@ public class WeaponHolder : MonoBehaviour
         _playerMovement.ApplyWeaponSpeed(currentWeapon.moveSpeedMultiplier);
     }
 
-    private void EquipWeapon(BaseWeaponData newWeapon, int slotIndex)
+    private void EquipWeapon(WeaponData newWeapon, int slotIndex)
     {
-        foreach (BaseWeaponData weapon in _equippedWeapons)
+        foreach (WeaponData weapon in _equippedWeapons)
         {
             if (weapon == newWeapon)
             {
@@ -73,7 +73,7 @@ public class WeaponHolder : MonoBehaviour
     }
 
     //Debug EquipWeapon
-    [SerializeField] private BaseWeaponData testWeapon;
+    [SerializeField] private WeaponData testWeapon;
     [SerializeField] private int testSlotIndex;
 
     [ContextMenu("Test Equip Weapon")]

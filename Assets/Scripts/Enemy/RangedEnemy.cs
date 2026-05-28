@@ -5,7 +5,7 @@ using UnityEngine;
 public class RangedEnemy : Enemy
 {
     [SerializeField] private LineRenderer _lineRenderer;
-    [SerializeField] private BaseWeaponData _weaponData;
+    [SerializeField] private WeaponData _weaponData;
     [SerializeField] private Transform _bulletSpawnPoint;
 
     private bool _isPreparingAttack = false;

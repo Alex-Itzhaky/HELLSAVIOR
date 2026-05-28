@@ -232,7 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e456725e11cc3ec4c987833028f91144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedEnemy
-  currentHp: 0
   rb: {fileID: 4944215325824207547}
   _healthController: {fileID: 0}
   playerTransform: {fileID: 0}
@@ -253,6 +252,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _randomSounds:
+  - {fileID: 8300000, guid: 7e5575767e7827646b7cd2f1eb9b9c88, type: 3}
+  _deathSound: {fileID: 8300000, guid: 7c7a9ebdd48357a4bbcf2ee72599e2da, type: 3}
+  _averageTimeBetweenSounds: 15
+  _maxTimeOffsetOfSounds: 3
   _lineRenderer: {fileID: 7698106426131823217}
   _weaponData: {fileID: 11400000, guid: 4b3f34975a557fe4db3b5bd5cfbf3746, type: 2}
   _bulletSpawnPoint: {fileID: 4434052071782580194}

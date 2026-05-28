@@ -14,6 +14,9 @@ public class HealthController : MonoBehaviour
     public UnityEvent OnDamaged;
     public UnityEvent OnDamagedWhileInvincible;
 
+    [SerializeField] private AudioClip _damageSFX;
+    [SerializeField] private AudioClip _deathSFX;
+
     private void Awake()
     {
         currentHealth = maximumHealth;
@@ -29,10 +32,13 @@ public class HealthController : MonoBehaviour
         {
             OnDied.Invoke();
             Debug.Log("OnDied event");
+            SoundManager.Instance.MuteMusic();
+            SoundManager.Instance.PlaySoundFXClip(_deathSFX, transform, 1f, 0f);
         }
         else
         {
             OnDamaged.Invoke();
+
         }
     }
 

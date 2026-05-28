@@ -28,7 +28,7 @@ public class BaseBulletBehavior : MonoBehaviour
         SetVelocity();
     }
 
-    public void InitBullet(BaseWeaponData weapon)
+    public void InitBullet(WeaponData weapon)
     {
         damage = weapon.damage;
         bulletRange = weapon.bulletRange;

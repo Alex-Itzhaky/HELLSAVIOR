@@ -17,6 +17,12 @@ public class Enemy : MonoBehaviour, IDamageable
     private Vector2 _targetDirection;
     public UnityEvent OnDamaged;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] _randomSounds;
+    [SerializeField] private AudioClip _deathSound;
+    [SerializeField] private float _averageTimeBetweenSounds;
+    [SerializeField] private float _maxTimeOffsetOfSounds;
+
     private void Awake()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -29,13 +35,15 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Start()
     {
         currentEnemyState = EnemyState.Idle;
+
+        if (_randomSounds.Length > 0)
+            StartCoroutine(RandomSoundCoroutine());
     }
     private void FixedUpdate()
     {
         HandleEnemyStateMachine();
         SetVelocity();
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -167,11 +175,37 @@ public class Enemy : MonoBehaviour, IDamageable
         //Jouer anim mort
 
         //Une fois anim finie :
+        SoundManager.Instance.PlaySoundFXClip(_deathSound, transform);
         Destroy(gameObject);
     }
     public void OnGameOver()
     {
         currentEnemyState = EnemyState.GameOver;
+    }
+
+    protected void PlayRandomSound()
+    {
+        if (_randomSounds.Length <= 0)
+            return;
+        else if (_randomSounds.Length == 1)
+        {
+            float pitchVariance = 0.1f;
+            SoundManager.Instance.PlaySoundFXClip(_randomSounds[0], transform, 1f, pitchVariance);
+        }
+        else
+        {
+            int index = Random.Range(0, _randomSounds.Length - 1);
+            float pitchVariance = 0.1f;
+            SoundManager.Instance.PlaySoundFXClip(_randomSounds[index], transform, 1f, pitchVariance);
+        }
+    }
+
+    private IEnumerator RandomSoundCoroutine()
+    {
+        float timer = Random.Range(_averageTimeBetweenSounds - _maxTimeOffsetOfSounds, _averageTimeBetweenSounds + _maxTimeOffsetOfSounds);
+        yield return new WaitForSeconds(timer);
+        PlayRandomSound();
+        StartCoroutine(RandomSoundCoroutine());
     }
 
 

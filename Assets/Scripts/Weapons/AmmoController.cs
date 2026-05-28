@@ -7,7 +7,7 @@ public class AmmoController : MonoBehaviour
 {
     private WeaponHolder _weaponHolder;
 
-    private Dictionary<BaseWeaponData, int> _ammoRegistry = new Dictionary<BaseWeaponData, int>();
+    private Dictionary<WeaponData, int> _ammoRegistry = new Dictionary<WeaponData, int>();
 
     public int currentAmmo => _ammoRegistry[_weaponHolder.currentWeapon];
     public bool[] isWeaponReloading { get; private set; } = new bool[2];
@@ -37,16 +37,16 @@ public class AmmoController : MonoBehaviour
         ManualGunReload();
     }
 
-    private void RegisterWeapon(BaseWeaponData weapon)
+    private void RegisterWeapon(WeaponData weapon)
     {
         if (!_ammoRegistry.ContainsKey(weapon))
             _ammoRegistry[weapon] = weapon.ammoCount;
     }
 
-    public bool HasAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] > 0;
-    public bool HasMaxAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] >= weapon.ammoCount;
-    public void ConsumeAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon]--;
-    public void RefillAmmo(BaseWeaponData weapon) => _ammoRegistry[weapon] = weapon.ammoCount;
+    public bool HasAmmo(WeaponData weapon) => _ammoRegistry[weapon] > 0;
+    public bool HasMaxAmmo(WeaponData weapon) => _ammoRegistry[weapon] >= weapon.ammoCount;
+    public void ConsumeAmmo(WeaponData weapon) => _ammoRegistry[weapon]--;
+    public void RefillAmmo(WeaponData weapon) => _ammoRegistry[weapon] = weapon.ammoCount;
 
     public void OnWeaponChanged(int slotIndex)
     {
@@ -55,7 +55,7 @@ public class AmmoController : MonoBehaviour
     private IEnumerator GunReloadCoroutine(float reloadTime, int indexToReload)
     {
         isWeaponReloading[indexToReload] = true;
-        BaseWeaponData weaponToReload = _weaponHolder.GetWeaponAt(indexToReload);
+        WeaponData weaponToReload = _weaponHolder.GetWeaponAt(indexToReload);
 
         while (ElapsedTimeReloading[indexToReload] < reloadTime)
         {

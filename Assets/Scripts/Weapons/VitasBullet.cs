@@ -9,6 +9,7 @@ public class VitasBullet : BaseBulletBehavior
     [SerializeField] private float blastRadius = .8f;
     [SerializeField] private float blastDuration = 0.5f;
     [SerializeField] private int healthDrain = 15;
+    [SerializeField] private AudioClip _explosionSFX;
 
     private bool isExploding = false;
     private Vector2 blastOrigin;
@@ -32,7 +33,7 @@ public class VitasBullet : BaseBulletBehavior
     private IEnumerator ExplodeBullet(Collider2D collision)
     {
         isExploding = true;
-
+        SoundManager.Instance.PlaySoundFXClip(_explosionSFX, transform, 0.85f, 0f);
         blastOrigin = collision.transform.position;
         Collider2D[] collisionHits = Physics2D.OverlapCircleAll(blastOrigin, blastRadius);
         foreach (Collider2D collisionHit in collisionHits)

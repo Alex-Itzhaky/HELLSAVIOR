@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapons/WeaponData")]
-public class BaseWeaponData : ScriptableObject
+public class WeaponData : ScriptableObject
 {
     public string weaponName;
     public string weaponDescription;
@@ -15,4 +15,5 @@ public class BaseWeaponData : ScriptableObject
     public int ammoCount;
     public float reloadTime;
     public float moveSpeedMultiplier = 1f;
+    public AudioClip shootSFX;
 }

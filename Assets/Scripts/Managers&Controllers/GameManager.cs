@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public BaseWeaponData[] weaponsEquipped { get; private set; } = new BaseWeaponData[2];
+    public WeaponData[] weaponsEquipped { get; private set; } = new WeaponData[2];
 
     public bool isLoadedFromMainMenu = false;
 
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent GameOver;
 
     [SerializeField] private GameOverUi _gameOverUI;
+    [SerializeField] private AudioClip _gameMusic;
     
     private void Awake()
     {
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
         }
         if (scene.name == "MainMenu" && !isLoadedFromMainMenu)
             isLoadedFromMainMenu = true;
+        if (scene.name == "ScenePrototype" && isLoadedFromMainMenu)
+            SoundManager.Instance.PlayMusicClip(_gameMusic, transform);
+
+
         isGameOverPlaying = false;
     }
 
@@ -56,9 +61,9 @@ public class GameManager : MonoBehaviour
         InputManager.Instance.SwitchInputMap(InputManager.ActionMap.Player);
     }
 
-    public void SetPlayerWeapons(BaseWeaponData[] weapons)
+    public void SetPlayerWeapons(WeaponData[] weapons)
     {
-        weaponsEquipped = (BaseWeaponData[])weapons.Clone();
+        weaponsEquipped = (WeaponData[])weapons.Clone();
     }
 
     public void TriggerPlayerDeath()

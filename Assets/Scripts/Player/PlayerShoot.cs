@@ -32,6 +32,8 @@ public class PlayerShoot : MonoBehaviour
         {
             ShootGun();
             //InputManager.Instance.isPlayerShooting = false;
+            if (_weaponHolder.currentWeapon.shootSFX != null)
+                SoundManager.Instance.PlaySoundFXClip(_weaponHolder.currentWeapon.shootSFX, transform, 1f, 0.25f);
         }
     }
 
@@ -66,7 +68,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void InstantiateBullet()
     {
-        BaseWeaponData weaponData = _weaponHolder.currentWeapon;
+        WeaponData weaponData = _weaponHolder.currentWeapon;
 
         GameObject bulletInstance = Instantiate(
             weaponData.bulletPrefab,
