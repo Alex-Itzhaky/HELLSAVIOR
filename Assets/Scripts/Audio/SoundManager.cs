@@ -61,7 +61,6 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator FadeMusicOut(float duration)
     {
-        //_audioMixer.DOSetFloat("musicVolume", -80f, duration).SetEase(Ease.OutQuint).SetUpdate(true);
         _audioMixer.GetFloat("musicVolume", out _previousMusicVolume);
         float elapsedTime = 0f;
         while (elapsedTime < duration)
@@ -74,7 +73,6 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator FadeMusicIn(float duration)
     {
-        //_audioMixer.DOSetFloat("musicVolume", 0f, duration).SetEase(Ease.OutQuint).SetUpdate(true);
         _audioMixer.GetFloat("musicVolume", out _previousMusicVolume);
         float elapsedTime = 0f;
         while (elapsedTime < duration)

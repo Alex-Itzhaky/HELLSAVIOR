@@ -23,7 +23,6 @@ public class PlayerShoot : MonoBehaviour
         if (_ammoController.isWeaponReloading[_weaponHolder.currentIndex])
             return;
         HandleShootingInput();
-        //HandleReloadInput();
     }
 
     private void HandleShootingInput()
@@ -31,7 +30,6 @@ public class PlayerShoot : MonoBehaviour
         if (InputManager.Instance.isPlayerShooting && _canShoot)
         {
             ShootGun();
-            //InputManager.Instance.isPlayerShooting = false;
             if (_weaponHolder.currentWeapon.shootSFX != null)
                 SoundManager.Instance.PlaySoundFXClip(_weaponHolder.currentWeapon.shootSFX, transform, 1f, 0.25f);
         }

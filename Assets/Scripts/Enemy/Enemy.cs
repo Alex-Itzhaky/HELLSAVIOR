@@ -219,7 +219,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void SpawnDamageParticles(Vector2 attackDirection)
     {
-        Quaternion spawnRotation = Quaternion.LookRotation(attackDirection);
+        Quaternion spawnRotation = Quaternion.FromToRotation(Vector2.up, attackDirection);
 
         _damageParticlesInstance = Instantiate(_damageParticlesPrefab, transform.position, spawnRotation);
     }

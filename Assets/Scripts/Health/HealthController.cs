@@ -13,6 +13,7 @@ public class HealthController : MonoBehaviour
     public UnityEvent OnDied;
     public UnityEvent OnDamaged;
     public UnityEvent OnDamagedWhileInvincible;
+    public UnityEvent OnHealed;
 
     [SerializeField] private AudioClip _damageSFX;
     [SerializeField] private AudioClip _deathSFX;
@@ -58,5 +59,6 @@ public class HealthController : MonoBehaviour
     public void AddHealth(int healthReceived)
     {
         currentHealth = Mathf.Min(currentHealth + healthReceived, maximumHealth);
+        OnHealed.Invoke();
     }
 }

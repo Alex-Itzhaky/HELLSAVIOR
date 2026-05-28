@@ -15,7 +15,6 @@ public class CrosshairLockOnEnemy : MonoBehaviour
 
     private bool _wasPlayerLockedOnEnemyLastFrame;
 
-    //[SerializeField] private float _stickMagnitudeToSwitch = 0.2f;
 
     private void Awake()
     {
@@ -119,7 +118,6 @@ public class CrosshairLockOnEnemy : MonoBehaviour
         }
         if (InputManager.Instance.isPlayerLockedOnEnemy)
         {
-            //transform.position = _currentEnemyLocked.transform.position;
             transform.position = Vector2.Lerp(
                 transform.position,
                 _currentEnemyLocked.transform.position,
@@ -139,59 +137,4 @@ public class CrosshairLockOnEnemy : MonoBehaviour
             InputManager.Instance.CancelLockInput();
         }
     }
-
-    //private void SwitchEnemyLock(EnemyBase enemyLocked, List<EnemyBase> enemyList)
-    //{
-    //    if (enemyList.Count < 2)
-    //        return;
-    //    if (!InputManager.isPlayerLockedOnEnemy)
-    //        return;
-    //    if (enemyLocked == null)
-    //        return;
-
-    //    //Etablir la liste des ennemis présent dans la crosshair (enemyLocked exclu)
-    //    List<EnemyBase> potentialEnemiesList = enemyList;
-    //    potentialEnemiesList.Remove(enemyLocked);
-
-    //    if (InputManager.isGamepad)
-    //    {
-    //        if (InputManager.rightStickDirection.magnitude < _stickMagnitudeToSwitch)
-    //            return;
-
-    //        EnemyBase lowestScoreEnemy = null;
-    //        float lowestScore = 1000f;
-    //        foreach (EnemyBase enemy in potentialEnemiesList)
-    //        {
-    //            float rightStickAngle = Mathf.Atan2(
-    //                InputManager.rightStickDirection.x,
-    //                InputManager.rightStickDirection.y
-    //            ) * Mathf.Rad2Deg;
-
-    //            //On calcule l'ennemi le plus proche en rotation
-    //            float enemyAngleFromCrosshair = Mathf.Atan2(
-    //                enemy.transform.position.x - transform.position.x,
-    //                enemy.transform.position.y - transform.position.y
-    //            ) * Mathf.Rad2Deg;
-
-    //            float angleBetweenStickAndEnemy = Mathf.Abs(Mathf.DeltaAngle(rightStickAngle, enemyAngleFromCrosshair));
-
-    //            //On calcule ensuite l'ennemi le plus proche en distance
-
-    //            float enemyDistanceFromCrosshair = Vector2.Distance(transform.position, enemy.transform.position);
-
-    //            //On finit en calculant le score et en séléctionnant l'ennemi à lock
-
-    //            float score = ((angleBetweenStickAndEnemy / 180) * _angleLockWeight) + ((enemyDistanceFromCrosshair / _moveCrosshairScript.crosshairDistance) * _distanceLockWeight);
-    //            if (score < lowestScore)
-    //            {
-    //                lowestScore = score;
-    //                lowestScoreEnemy = enemy;
-    //            }
-    //        }
-    //        if (lowestScoreEnemy != null)
-    //        {
-    //            SetLockedEnemy(lowestScoreEnemy);
-    //        }
-    //    }
-    //}
 }

@@ -57,7 +57,8 @@ public class BaseBulletBehavior : MonoBehaviour
     protected virtual void OnBulletHit(Collider2D collision)
     {
         InflictDamageOnCollision(collision);
-        DestroyBullet();
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Walls"))
+            DestroyBullet();
     }
 
     private void InflictDamageOnCollision(Collider2D collision)
@@ -65,7 +66,7 @@ public class BaseBulletBehavior : MonoBehaviour
         IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
         if (iDamageable != null)
         {
-            iDamageable.Damage(damage, transform.right);
+            iDamageable.Damage(damage, transform.up);
         }
     }
 

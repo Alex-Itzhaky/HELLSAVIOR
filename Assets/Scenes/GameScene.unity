@@ -8849,6 +8849,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnHealed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 267889510}
+        m_TargetAssemblyTypeName: UiHealthBar, Assembly-CSharp
+        m_MethodName: UpdateHealthBarValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _damageSFX: {fileID: 8300000, guid: 39e2d981e2704d84e99e26d497c1db0e, type: 3}
   _deathSFX: {fileID: 8300000, guid: 8b5f8209ddcb2174cb9d300e18f53f72, type: 3}
 --- !u!114 &1966516688

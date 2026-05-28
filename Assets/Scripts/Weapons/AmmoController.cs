@@ -87,15 +87,4 @@ public class AmmoController : MonoBehaviour
     {
         return _ammoRegistry[_weaponHolder.GetWeaponAt(index)];
     }
-
-
-    //private void OnGUI()
-    //{
-    //    int y = 10;
-    //    foreach (var entry in _ammoRegistry)
-    //    {
-    //        GUI.Label(new Rect(10, y, 300, 20), $"{entry.Key.weaponName} : {entry.Value}");
-    //        y += 25;
-    //    }
-    //}
 }
