@@ -8,6 +8,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] private int maximumHealth; //Valeur à changer pour modifier les pv de l'entité
 
     public float RemainingHealthPercentage => (float) currentHealth / (float) maximumHealth;
+    public bool isLifestealBonusEnabled = false;
     
 
     public UnityEvent OnDied;

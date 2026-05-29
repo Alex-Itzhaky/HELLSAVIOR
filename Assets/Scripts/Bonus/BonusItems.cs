@@ -4,11 +4,12 @@ using UnityEngine.Events;
 public class BonusItems : MonoBehaviour
 {
     protected GameObject player;
-    public virtual void OnPickup() { }
+    
     public UnityEvent PickUp;
     private BonusSpawner _bonusSpawner;
     private Transform _parentSpawnpoint;
 
+    public virtual void OnPickup() { }
     public void Init(BonusSpawner bonusSpawner, Transform parentSpawnPoint)
     {
         _bonusSpawner = bonusSpawner;

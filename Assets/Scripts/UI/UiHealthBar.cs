@@ -19,6 +19,6 @@ public class UiHealthBar : MonoBehaviour
     {
         if (_healthController == null || PauseManager.Instance.IsPaused)
             return;
-        _healthBar.DOValue(_healthController.RemainingHealthPercentage, barSpeed);     
+        _healthBar.DOValue(_healthController.RemainingHealthPercentage, barSpeed).SetUpdate(true);     
     }
 }

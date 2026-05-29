@@ -26,7 +26,6 @@ public class BaseBulletBehavior : MonoBehaviour
     {
         CheckDistanceTravelled();
         SetVelocity();
-        Debug.Log($"Transform.up = {transform.up}");
     }
 
     public void InitBullet(WeaponData weapon)

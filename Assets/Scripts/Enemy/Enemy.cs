@@ -182,6 +182,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
         //Une fois anim finie :
         SoundManager.Instance.PlaySoundFXClip(_deathSound, transform);
+        if (_healthController.isLifestealBonusEnabled)
+            _healthController.AddHealth(Mathf.RoundToInt((float)enemyData.maxHp / 5f));
         Destroy(gameObject);
     }
     public void OnGameOver()

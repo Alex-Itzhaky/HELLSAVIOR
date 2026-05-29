@@ -1327,7 +1327,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1469,9 +1469,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a607a79234b939419b5ef9a855d50c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusSpawner
+  _spawnPointsList:
+  - {fileID: 1692170266}
+  - {fileID: 1782939363}
+  - {fileID: 280099383}
+  - {fileID: 2107479292}
   _healthBonusPrefab: {fileID: 441497550007148997, guid: 3d8152f6a83117e4faf6f38592dc0234, type: 3}
   _invincibilityBonusPrefab: {fileID: 2946633661824625647, guid: 270371c00b0191746a08524cf886898d, type: 3}
   _speedBonusPrefab: {fileID: 5568000649540706073, guid: fa59e03dd2329c84897a069ced1a577c, type: 3}
+  _lifestealBonusPrefab: {fileID: 4085664284468375138, guid: 7251a814ac87aa645be4545f81756725, type: 3}
 --- !u!1 &314663439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,7 +1912,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7613,7 +7619,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8258,7 +8264,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -8851,6 +8857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da982f5172f95384c834035c46fef9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvincibleController
+  _spriteRenderer: {fileID: 128682008}
+  _intervalBetweenFlashes: 0.1
   isInvincible: 0
 --- !u!114 &1966516687
 MonoBehaviour:
@@ -8867,6 +8875,7 @@ MonoBehaviour:
   invincibleController: {fileID: 1966516686}
   currentHealth: 100
   maximumHealth: 100
+  isLifestealBonusEnabled: 0
   OnDied:
     m_PersistentCalls:
       m_Calls:
@@ -10180,7 +10189,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

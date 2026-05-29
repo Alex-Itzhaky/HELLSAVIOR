@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class BonusSpawner : MonoBehaviour
 {
-    private List<Transform> _spawnPointsList = new List<Transform>();
+    [SerializeField] private List<Transform> _spawnPointsList = new List<Transform>();
     private List<bool> _isAvailable = new List<bool>();
 
     [SerializeField] private GameObject _healthBonusPrefab;
     [SerializeField] private GameObject _invincibilityBonusPrefab;
     [SerializeField] private GameObject _speedBonusPrefab;
+    [SerializeField] private GameObject _lifestealBonusPrefab;
 
     private void Start()
     {
-        _spawnPointsList = GetComponentsInChildren<Transform>().ToList<Transform>();
         foreach (Transform t in _spawnPointsList)
         {
             _isAvailable.Add(true);
@@ -49,7 +49,8 @@ public class BonusSpawner : MonoBehaviour
 
     private GameObject ChooseRandomBonus()
     {
-        int randBonus = Random.Range(0, 3);
+        int randBonus = Random.Range(0, 4);
+        Debug.Log(randBonus);
         switch (randBonus)
         {
             case 0:
@@ -58,6 +59,8 @@ public class BonusSpawner : MonoBehaviour
                 return _invincibilityBonusPrefab;
             case 2:
                 return _speedBonusPrefab;
+            case 3:
+                return _lifestealBonusPrefab;
             default:
                 return _healthBonusPrefab;
         }

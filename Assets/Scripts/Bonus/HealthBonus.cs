@@ -7,7 +7,7 @@ public class HealthBonus : BonusItems
     public override void OnPickup()
     {
         HealthController healthController = player.GetComponent<HealthController>();
-        if (healthController.RemainingHealthPercentage >= 1 )
+        if (healthController.RemainingHealthPercentage < 1)
         {
             healthController.AddHealth(healAmount);
             Destroy(gameObject);
