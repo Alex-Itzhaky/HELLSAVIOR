@@ -1,4 +1,7 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -9,6 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _soundFXObject;
     [SerializeField] private AudioSource _musicObject;
     public AudioMixer _audioMixer;
+    private List<GameObject> _musicObjectInstances = new List<GameObject>();
 
     private float _previousMusicVolume;
     private bool _isMusicMuted;
@@ -33,7 +37,6 @@ public class SoundManager : MonoBehaviour
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume = 1f, float pitchVariance = 0.05f)
     {
         AudioSource audioSource = Instantiate(_soundFXObject, spawnTransform.position, Quaternion.identity);
-
         audioSource.clip = audioClip;
         audioSource.volume = volume;
 
@@ -51,7 +54,7 @@ public class SoundManager : MonoBehaviour
     public void PlayMusicClip(AudioClip audioClip, Transform spawnTransform, float volume = 1f, bool looping = true)
     {
         AudioSource audioSource = Instantiate(_musicObject, spawnTransform.position, Quaternion.identity);
-
+        _musicObjectInstances.Add(audioSource.gameObject);
         audioSource.clip = audioClip;
         audioSource.volume = volume;
         audioSource.loop = looping;
@@ -83,8 +86,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-
-
     public void MuteMusic()
     {
         if (!_isMusicMuted)
@@ -101,5 +102,26 @@ public class SoundManager : MonoBehaviour
             return;
         _audioMixer.SetFloat("musicVolume", _previousMusicVolume);
         _isMusicMuted = false;
+    }
+
+    public void MuffleMusic()
+    {
+        foreach(GameObject audioSource in _musicObjectInstances)
+        {
+            audioSource.GetComponent<AudioLowPassFilter>().cutoffFrequency = 1500f;
+        }
+    }
+
+    public void UnmuffleMusic()
+    {
+        foreach(GameObject audioSource in _musicObjectInstances)
+        {
+            audioSource.GetComponent<AudioLowPassFilter>().cutoffFrequency = 5007.7f;
+        }
+    }
+
+    public void RemoveMusicSourceFromList(GameObject musicSource)
+    {
+        _musicObjectInstances.Remove(musicSource);
     }
 }

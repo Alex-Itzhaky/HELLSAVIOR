@@ -23,16 +23,19 @@ public class GameOverUi : MonoBehaviour
             .OnComplete(() => { 
                 InputManager.Instance.SwitchInputMap(InputManager.ActionMap.UI);
             });
+        SoundManager.Instance.MuffleMusic();
     }
 
     public void Restart()
     {
         OnRestart.Invoke();
+        SoundManager.Instance.UnmuffleMusic();
     }
 
     public void MainMenu()
     {
         OnMainMenu.Invoke();
+        SoundManager.Instance.UnmuffleMusic();
     }
 
     public void Quit()

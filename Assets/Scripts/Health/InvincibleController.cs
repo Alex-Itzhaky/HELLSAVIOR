@@ -5,6 +5,8 @@ public class InvincibleController : MonoBehaviour
 {
     private HealthController healthController;
 
+    public bool isInvincible;
+
     private void Awake()
     {
         healthController = GetComponent<HealthController>();
@@ -12,15 +14,15 @@ public class InvincibleController : MonoBehaviour
 
     public void StartInvincibility(float invincibilityDuration)
     {
-        if (healthController.isInvincible)
+        if (isInvincible)
             return;
         StartCoroutine(InvincibiltyCoroutine(invincibilityDuration));
     }
 
     private IEnumerator InvincibiltyCoroutine(float invincibilityDuration) //timer pour l'invincibilité
     {
-        healthController.isInvincible = true;
+        isInvincible = true;
         yield return new WaitForSeconds(invincibilityDuration); //Attend pendant duration secondes
-        healthController.isInvincible = false;
+        isInvincible = false;
     }
 }

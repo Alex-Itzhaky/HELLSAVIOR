@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KnockbackWhenDamaged _knockback;
 
     public void ResetSpeed() => _moveSpeed = _baseSpeed;
-    public void ApplyWeaponSpeed(float moveSpeedMultiplier) => _moveSpeed *= moveSpeedMultiplier;
+    public void ApplySpeedMultiplier(float moveSpeedMultiplier) => _moveSpeed *= moveSpeedMultiplier;
 
     private void Awake()
     {

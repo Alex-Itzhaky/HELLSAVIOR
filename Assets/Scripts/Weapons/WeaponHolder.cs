@@ -55,7 +55,7 @@ public class WeaponHolder : MonoBehaviour
         if (currentWeapon == null)
             return;
         _playerMovement.ResetSpeed();
-        _playerMovement.ApplyWeaponSpeed(currentWeapon.moveSpeedMultiplier);
+        _playerMovement.ApplySpeedMultiplier(currentWeapon.moveSpeedMultiplier);
     }
 
     private void EquipWeapon(WeaponData newWeapon, int slotIndex)

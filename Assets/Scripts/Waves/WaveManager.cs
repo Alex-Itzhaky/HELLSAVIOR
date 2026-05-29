@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     }
 
     [SerializeField] private EnemySpawner _enemySpawner;
+    [SerializeField] private BonusSpawner _bonusSpawner;
     private WaveState _currentWaveState;
 
     private List<EnemyType> _enemiesToSpawn = new List<EnemyType>();
@@ -138,6 +139,7 @@ public class WaveManager : MonoBehaviour
         {
             _enemySpawner.RequestEnemySpawn(enemy);
         }
+        _bonusSpawner.SpawnBonus();
         _currentWaveState = WaveState.Playing;
     }
 
