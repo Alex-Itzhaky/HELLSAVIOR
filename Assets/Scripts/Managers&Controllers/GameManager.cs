@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameOverUi _gameOverUI;
     [SerializeField] private AudioClip _gameMusic;
+    [SerializeField] private AudioClip _mainMenuMusic;
     
     private void Awake()
     {
@@ -52,6 +53,10 @@ public class GameManager : MonoBehaviour
             isLoadedFromMainMenu = true;
         if (scene.name == "GameScene" && isLoadedFromMainMenu)
             SoundManager.Instance.PlayMusicClip(_gameMusic, transform);
+        if (scene.name == "MainMenu")
+        {
+            SoundManager.Instance.PlayMusicClip(_mainMenuMusic, transform);
+        }
 
         if (isGameRunning)
             SoundManager.Instance.UnmuteMusic();
