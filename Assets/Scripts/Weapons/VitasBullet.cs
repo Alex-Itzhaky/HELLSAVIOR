@@ -29,6 +29,7 @@ public class VitasBullet : BaseBulletBehavior
     {
         StartCoroutine(ExplodeBullet(collision));
         CameraShake.cameraInstance.StartCameraShake(blastDuration, 0.3f);
+        SpawnExplosionParticles();
         DestroyBullet();
     }
 
