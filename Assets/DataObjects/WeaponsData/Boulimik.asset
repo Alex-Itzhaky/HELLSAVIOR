@@ -24,3 +24,4 @@ MonoBehaviour:
   ammoCount: 150
   reloadTime: 4
   moveSpeedMultiplier: 0.5
+  shootSFX: {fileID: 8300000, guid: 0302d294a53f482468bd6181611567c7, type: 3}

@@ -10,6 +10,9 @@ public class VitasBullet : BaseBulletBehavior
     [SerializeField] private float blastDuration = 0.5f;
     [SerializeField] private int healthDrain = 15;
     [SerializeField] private AudioClip _explosionSFX;
+    [SerializeField] private GameObject _explosionParticlePrefab;
+
+    private GameObject _explosionParticleInstance;
 
     private bool isExploding = false;
     private Vector2 blastOrigin;
@@ -27,6 +30,7 @@ public class VitasBullet : BaseBulletBehavior
     {
         StartCoroutine(ExplodeBullet(collision));
         CameraShake.cameraInstance.StartCameraShake(blastDuration, 0.3f);
+        SpawnExplosionParticles();
         DestroyBullet();
     }
 
@@ -46,6 +50,11 @@ public class VitasBullet : BaseBulletBehavior
         }
         yield return new WaitForSeconds(blastDuration);
         isExploding = false;
+    }
+
+    private void SpawnExplosionParticles()
+    {
+        _explosionParticleInstance = Instantiate(_explosionParticlePrefab, transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos()

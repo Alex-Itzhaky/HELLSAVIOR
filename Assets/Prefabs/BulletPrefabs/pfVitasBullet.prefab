@@ -212,6 +212,7 @@ MonoBehaviour:
   blastDuration: 1
   healthDrain: 15
   _explosionSFX: {fileID: 8300000, guid: 8975d3f7e4d2f90438bec878126eca45, type: 3}
+  _explosionParticlePrefab: {fileID: 6387051566459551054, guid: ab60b0e8d75399d47bc53e1224a81deb, type: 3}
 --- !u!96 &-2272037926685444040
 TrailRenderer:
   serializedVersion: 4
