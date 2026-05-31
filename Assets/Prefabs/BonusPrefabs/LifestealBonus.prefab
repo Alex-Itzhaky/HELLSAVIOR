@@ -157,3 +157,5 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   lifestealDuration: 8
+  spriteRenderer: {fileID: 2960344824108479824}
+  circleCollider: {fileID: 183084470858013592}

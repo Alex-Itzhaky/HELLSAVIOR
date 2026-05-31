@@ -129,7 +129,7 @@ MonoBehaviour:
   OnDamaged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 631348061468108951}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DamageFlash, Assembly-CSharp
         m_MethodName: CallDamageFlash
         m_Mode: 1
@@ -191,7 +191,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5127670199975596582}
-  - component: {fileID: 631348061468108951}
   - component: {fileID: 3903690212276777908}
   m_Layer: 7
   m_Name: EnemyGFX
@@ -216,66 +215,6 @@ Transform:
   - {fileID: 5263472307523202254}
   m_Father: {fileID: 7339385144371581735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
---- !u!114 &631348061468108951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3151314028566145396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a982cec768e588489cff9028ecb5083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  _flashColor: {r: 1, g: 1, b: 1, a: 1}
-  _flashTime: 0.25
-  _flashAnimCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -16.634174
-      outSlope: -16.634174
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.06003358
-      value: 0.001390934
-      inSlope: -0.3415615
-      outSlope: -0.3415615
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.13565013
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.12393904
-      value: 0.9990628
-      inSlope: -0.22685885
-      outSlope: -0.22685885
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.11506525
-    - serializedVersion: 3
-      time: 0.23254395
-      value: -0.004173279
-      inSlope: -9.237484
-      outSlope: -9.237484
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _spriteRenderers:
-  - {fileID: 8165363228407557172}
-  - {fileID: 5050692506650779593}
-  _material: {fileID: 2100000, guid: df66ecf0d7f6f3f45a43bdc19a6159ee, type: 2}
 --- !u!95 &3903690212276777908
 Animator:
   serializedVersion: 7
@@ -350,14 +289,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7479388037597181223, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: df66ecf0d7f6f3f45a43bdc19a6159ee, type: 2}
-    - target: {fileID: 3419772249670400292, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: df66ecf0d7f6f3f45a43bdc19a6159ee, type: 2}
     - target: {fileID: 6424374415033144485, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -371,18 +302,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 4843985084834002234, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
---- !u!212 &5050692506650779593 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -7479388037597181223, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
-  m_PrefabInstance: {fileID: 6783628466485155088}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5263472307523202254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
-  m_PrefabInstance: {fileID: 6783628466485155088}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &8165363228407557172 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3419772249670400292, guid: baf7a5b74f4cad14ab4080dfe3b6af90, type: 3}
   m_PrefabInstance: {fileID: 6783628466485155088}
   m_PrefabAsset: {fileID: 0}
