@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponDescription: "Une arme de poing qui regenere de la vie de l\u2019utilisateur
     a l\u2019impact d\u2019un ennemi. "
   weaponInGameSprite: {fileID: 0}
-  uiWeaponImage: {fileID: -994468689435567691, guid: 0b28d894b791b6c4e978a7c7902f0fc3, type: 3}
+  uiWeaponImage: {fileID: -6804522799953666648, guid: 7e2ebc378a02a7049b1af66f8abefab5, type: 3}
   bulletPrefab: {fileID: 8264934864893840872, guid: 83d286c117a64394fb7e97c0e7571924, type: 3}
   damage: 10
   firerate: 0.5
