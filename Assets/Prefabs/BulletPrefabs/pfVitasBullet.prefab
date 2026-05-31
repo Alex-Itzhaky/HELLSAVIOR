@@ -208,10 +208,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   bulletSpeed: 100
-  blastRadius: 5
+  blastRadius: 10
   blastDuration: 1
   healthDrain: 15
   _explosionSFX: {fileID: 8300000, guid: 8975d3f7e4d2f90438bec878126eca45, type: 3}
+  _explosionParticlesPrefab: {fileID: 3640459664327983207, guid: b7da1780d6287fd4f91f11837a1230fa, type: 3}
 --- !u!96 &-2272037926685444040
 TrailRenderer:
   serializedVersion: 4

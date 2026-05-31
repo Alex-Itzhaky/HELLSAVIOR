@@ -10,6 +10,8 @@ public class VitasBullet : BaseBulletBehavior
     [SerializeField] private float blastDuration = 0.5f;
     [SerializeField] private int healthDrain = 15;
     [SerializeField] private AudioClip _explosionSFX;
+    [SerializeField] private GameObject _explosionParticlesPrefab;
+    private GameObject _explosionParticlesInsatnce;
 
     private bool isExploding = false;
     private Vector2 blastOrigin;
@@ -55,5 +57,10 @@ public class VitasBullet : BaseBulletBehavior
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(blastOrigin, blastRadius);
+    }
+
+    private void SpawnExplosionParticles()
+    {
+        _explosionParticlesInsatnce = Instantiate(_explosionParticlesPrefab, transform.position, Quaternion.identity);
     }
 }

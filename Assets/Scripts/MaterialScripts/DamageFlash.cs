@@ -1,5 +1,6 @@
 using DG.Tweening.Core.Easing;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageFlash : MonoBehaviour
@@ -8,7 +9,7 @@ public class DamageFlash : MonoBehaviour
     [SerializeField] private float _flashTime = 0.25f;
     [SerializeField] private AnimationCurve _flashAnimCurve;
 
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private List<SpriteRenderer> _spriteRenderers = new List<SpriteRenderer>();
     [SerializeField] private Material _material;
 
     private void Awake()
@@ -18,13 +19,20 @@ public class DamageFlash : MonoBehaviour
 
     private void Init()
     {
-        _material = _spriteRenderer.material;
-        SetFlashAmount(0f);
+        foreach(var sprite in _spriteRenderers)
+        {
+            _material = sprite.material;
+            SetFlashAmount(0f);
+        }
     }
 
     public void CallDamageFlash()
     {
-        StartCoroutine(FlashCoroutine());
+        foreach (var sprite in _spriteRenderers)
+        {
+            StartCoroutine(FlashCoroutine());
+        }
+        
     }
 
     private IEnumerator FlashCoroutine()
