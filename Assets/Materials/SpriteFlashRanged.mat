@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteFlashWhite
+  m_Name: SpriteFlashRanged
   m_Shader: {fileID: -6465566751694194690, guid: 423e9fabaf6e3df48835c76ebe49e87d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: -8328923581568760697, guid: 9ccb7611e1cf4d445b1b5a296bb983ce, type: 3}
+        m_Texture: {fileID: -8328923581568760697, guid: f9bf7989273f45049ad7ee58947fdb1e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:

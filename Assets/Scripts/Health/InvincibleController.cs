@@ -1,11 +1,12 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class InvincibleController : MonoBehaviour
 {
     private HealthController healthController;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private List<SpriteRenderer> _spriteRenderers = new List<SpriteRenderer>();
 
     [SerializeField] private float _intervalBetweenFlashes;
 
@@ -21,7 +22,8 @@ public class InvincibleController : MonoBehaviour
         if (isInvincible)
             return;
         StartCoroutine(InvincibiltyCoroutine(invincibilityDuration));
-        StartCoroutine(InvincibilityFlash(invincibilityDuration));
+        foreach (var sprite in _spriteRenderers)
+            StartCoroutine(InvincibilityFlash(invincibilityDuration, sprite));
     }
 
     private IEnumerator InvincibiltyCoroutine(float invincibilityDuration) //timer pour l'invincibilité
@@ -31,7 +33,7 @@ public class InvincibleController : MonoBehaviour
         isInvincible = false;
     }
 
-    private IEnumerator InvincibilityFlash(float invincibilityDuration)
+    private IEnumerator InvincibilityFlash(float invincibilityDuration, SpriteRenderer sprite)
     {
         float baseOpacity = 1f;
         float targetOpacity = 0.5f;
@@ -39,15 +41,15 @@ public class InvincibleController : MonoBehaviour
         float timer = 0f;
         while (timer  < invincibilityDuration)
         {
-            Tween fadeOutTween = _spriteRenderer.DOFade(targetOpacity, _intervalBetweenFlashes)
+            Tween fadeOutTween = sprite.DOFade(targetOpacity, _intervalBetweenFlashes)
                 .SetEase(Ease.InOutCirc);
             yield return fadeOutTween.WaitForCompletion();
-            Tween fadeInTween = _spriteRenderer.DOFade(baseOpacity,_intervalBetweenFlashes)
+            Tween fadeInTween = sprite.DOFade(baseOpacity,_intervalBetweenFlashes)
                 .SetEase(Ease.InOutCirc);
             yield return fadeInTween.WaitForCompletion();
             yield return null;
             timer += Time.deltaTime + _intervalBetweenFlashes * 2;
         }
-        _spriteRenderer.DOFade(baseOpacity, _intervalBetweenFlashes).SetEase(Ease.InOutCirc);
+        sprite.DOFade(baseOpacity, _intervalBetweenFlashes).SetEase(Ease.InOutCirc);
     }
 }
