@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Boulimik
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
   weaponName: Boulimik
-  weaponDescription: "Un mini-gun a la cadence inouie qui ralentit grandement l\u2019utilsateur."
+  weaponDescription: Ne sous-estimez pas cette arme juste parce que c'est un mini
+    gun ! Elle est capable de tirer a une cadence inouie et pese plus d'une tonne
+    !
   weaponInGameSprite: {fileID: 0}
-  uiWeaponImage: {fileID: -8739994193326603311, guid: 0b28d894b791b6c4e978a7c7902f0fc3, type: 3}
+  uiWeaponImage: {fileID: -8316494825536333342, guid: 369d8306577cfd44fb175774868b895d, type: 3}
   bulletPrefab: {fileID: 4544130920329254170, guid: 778f4c92648c17b428652c69807bbb17, type: 3}
-  damage: 5
+  damage: 9
   firerate: 0.1
   gunSpread: 10
   bulletRange: 50

@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponDescription: "Un lance-roquette qui produit des explosions a l\u2019impact,
     elle consomme la vie de l\u2019utilisateur a chaque tir."
   weaponInGameSprite: {fileID: 0}
-  uiWeaponImage: {fileID: -1040938210439099282, guid: 0b28d894b791b6c4e978a7c7902f0fc3, type: 3}
+  uiWeaponImage: {fileID: -9116942965547008377, guid: 0742429b4e1d5c34b9a97bf370c25dd6, type: 3}
   bulletPrefab: {fileID: 5027053210267203892, guid: 19a3767040d083f4bbd8ba5d962f8702, type: 3}
   damage: 80
   firerate: 1.4
