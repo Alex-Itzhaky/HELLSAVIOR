@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Maudicium
   m_EditorClassIdentifier: Assembly-CSharp::BaseWeaponData
   weaponName: Maudicium
-  weaponDescription: "Une mitraillette avec une cadence folle mais une port\xE9e
-    moindre qui procure une liberte\_de mouvement folle a l\u2019utilisateur."
+  weaponDescription: "Une mitraillette avec une cadence folle mais une portee moindre
+    qui procure une liberte\_de mouvement folle a l\u2019utilisateur."
   weaponInGameSprite: {fileID: 0}
   uiWeaponImage: {fileID: 5519093569847424708, guid: 73671261b366b4e4ab046a1586860011, type: 3}
   bulletPrefab: {fileID: 4544130920329254170, guid: 778f4c92648c17b428652c69807bbb17, type: 3}

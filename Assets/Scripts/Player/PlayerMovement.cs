@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _deceleration = 20f;
     private float _moveSpeed;
 
+
     private Vector2 _movementDir;
     private Vector2 _movementVelocity;
     private Vector2 _velocityRef;
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetSpeed() => _moveSpeed = _baseSpeed;
     public void ApplySpeedMultiplier(float moveSpeedMultiplier) => _moveSpeed *= moveSpeedMultiplier;
+
+
 
     private void Awake()
     {

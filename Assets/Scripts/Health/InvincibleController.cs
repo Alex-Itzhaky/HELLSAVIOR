@@ -47,8 +47,7 @@ public class InvincibleController : MonoBehaviour
             Tween fadeInTween = sprite.DOFade(baseOpacity,_intervalBetweenFlashes)
                 .SetEase(Ease.InOutCirc);
             yield return fadeInTween.WaitForCompletion();
-            yield return null;
-            timer += Time.deltaTime + _intervalBetweenFlashes * 2;
+            timer += _intervalBetweenFlashes * 2;
         }
         sprite.DOFade(baseOpacity, _intervalBetweenFlashes).SetEase(Ease.InOutCirc);
     }

@@ -22,7 +22,7 @@ public class DamageFlash : MonoBehaviour
         foreach(var sprite in _spriteRenderers)
         {
             _material = sprite.material;
-            SetFlashAmount(0f);
+            SetFlashAmount(0f, sprite);
         }
     }
 
@@ -30,14 +30,14 @@ public class DamageFlash : MonoBehaviour
     {
         foreach (var sprite in _spriteRenderers)
         {
-            StartCoroutine(FlashCoroutine());
+            StartCoroutine(FlashCoroutine(sprite));
         }
         
     }
 
-    private IEnumerator FlashCoroutine()
+    private IEnumerator FlashCoroutine(SpriteRenderer sprite)
     {
-        SetFlashColor();
+        SetFlashColor(sprite);
 
         float currentFlashAmount = 0f;
         float elapsedTime = 0f;
@@ -46,18 +46,18 @@ public class DamageFlash : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             currentFlashAmount = Mathf.Lerp(1f, _flashAnimCurve.Evaluate(elapsedTime), (elapsedTime / _flashTime));
-            SetFlashAmount(currentFlashAmount);
+            SetFlashAmount(currentFlashAmount, sprite);
             yield return null;
         }
     }
 
-    private void SetFlashColor()
+    private void SetFlashColor(SpriteRenderer sprite)
     {
-        _material.SetColor("_FlashColor", _flashColor);
+        sprite.material.SetColor("_FlashColor", _flashColor);
     }
 
-    private void SetFlashAmount(float amount)
+    private void SetFlashAmount(float amount, SpriteRenderer sprite)
     {
-        _material.SetFloat("_FlashAmount", amount);
+        sprite.material.SetFloat("_FlashAmount", amount);
     }
 }

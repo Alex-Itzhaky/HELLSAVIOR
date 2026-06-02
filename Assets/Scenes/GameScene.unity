@@ -1907,6 +1907,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 53.384068, y: 12.257889}
   m_EdgeRadius: 0
+--- !u!212 &343931336 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 367804616469461446, guid: 29287170392a45f40b3c00e16b7a3121, type: 3}
+  m_PrefabInstance: {fileID: 246387850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &381645198
 GameObject:
   m_ObjectHideFlags: 0
@@ -17062,8 +17067,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 686397923}
   - {fileID: 1326084567}
+  - {fileID: 686397923}
   - {fileID: 216942747}
   - {fileID: 1966516680}
   - {fileID: 682223025}
@@ -21587,7 +21592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 12.0974, y: -1.8}
+  m_AnchoredPosition: {x: 12.097412, y: -1.800003}
   m_SizeDelta: {x: -62.1819, y: -13.1801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1383700739
@@ -24466,7 +24471,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966516680}
-  - component: {fileID: 1966516692}
   - component: {fileID: 1966516691}
   - component: {fileID: 1966516681}
   - component: {fileID: 1966516690}
@@ -24495,7 +24499,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.53, y: 4.35, z: 0}
-  m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
+  m_LocalScale: {x: 0.37, y: 0.37, z: 0.37}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1868269922}
@@ -24584,7 +24588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d5041c8bf92c948a36a8451e65966a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDamagedInvincibility
-  invincibilityDuration: 0.3
+  invincibilityDuration: 0.4
 --- !u!114 &1966516686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24610,7 +24614,8 @@ MonoBehaviour:
   - {fileID: 711211743915854527}
   - {fileID: 7440237115261774802}
   - {fileID: 6566379587952949372}
-  _intervalBetweenFlashes: 0.1
+  - {fileID: 343931336}
+  _intervalBetweenFlashes: 0.15
   isInvincible: 0
 --- !u!114 &1966516687
 MonoBehaviour:
@@ -24814,7 +24819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   _baseSpeed: 10
-  _acceleration: 0.1
+  _acceleration: 0.3
   _deceleration: 0.1
   _knockback: {fileID: 1966516683}
 --- !u!70 &1966516691
@@ -24854,52 +24859,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.44}
   m_Size: {x: 1.57, y: 5.28}
   m_Direction: 0
---- !u!61 &1966516692
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966516679}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &1971789584
 GameObject:
   m_ObjectHideFlags: 0
